@@ -1,37 +1,49 @@
 package model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 // Represents all the meals eaten in the day
-public class AllMeals {
+public class DailyMeals {
 
-    private List<Meal> eatenToday;
+    private ArrayList<Meal> eatenToday;
     private int totalCalories;
     private int totalCarbohydrates;
     private int totalFats;
     private int totalProtein;
 
     // EFFECTS: constructs an empty list of meals
-    public AllMeals() {
-        this.eatenToday = null;
+    public DailyMeals() {
+        this.eatenToday = new ArrayList<Meal>();
     }
 
     // MODIFIES: this
-    // EFFECTS: adds the given meal to the list
-    public void addMeal(Meal m) {
-        eatenToday.add(m);
+    // EFFECTS: adds the given meal to the list and produce true
+    public boolean addMeal(Meal m) {
+        this.eatenToday.add(m);
+        return true;
     }
 
     // MODIFIES: this
-    // EFFECTS: removes the given meal from the list
-    public void removeMeal(Meal m) {
-        eatenToday.remove(m);
+    // EFFECTS: if the given meal is in the list,
+    //          remove it from the list and produce true;
+    //          otherwise, produce false
+    public boolean removeMeal(Meal m) {
+        if (this.eatenToday.contains(m)) {
+            this.eatenToday.remove(m);
+            return true;
+        }
+        return false;
+    }
+
+    // EFFECTS: produces all the meals in a list
+    public ArrayList<Meal> getDailyMeals() {
+        return this.eatenToday;
     }
 
     // EFFECTS: produces the total calories eaten today
     public int getTotalCalories() {
         this.totalCalories = 0;
-        for (Meal m : eatenToday) {
+        for (Meal m : this.eatenToday) {
             this.totalCalories += m.getCalories();
         }
         return this.totalCalories;
@@ -40,7 +52,7 @@ public class AllMeals {
     // EFFECTS: produces the total carbs eaten today
     public int getTotalCarbohydrates() {
         this.totalCarbohydrates = 0;
-        for (Meal m : eatenToday) {
+        for (Meal m : this.eatenToday) {
             this.totalCarbohydrates += m.getCarbohydrates();
         }
         return this.totalCarbohydrates;

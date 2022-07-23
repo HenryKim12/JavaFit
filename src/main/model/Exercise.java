@@ -20,15 +20,17 @@ public class Exercise {
     // REQUIRES: numOfSetsAdded > 0
     // MODIFIES: this
     // EFFECTS: adds value of numOfSetsAdded to the exercise's sets
-    public void addSet(int numOfSetsAdded) {
+    public int addSet(int numOfSetsAdded) {
         this.sets += numOfSetsAdded;
+        return this.sets;
     }
 
     // REQUIRES: numOfRepsAdded > 0
     // MODIFIES: this
     // EFFECTS: adds value of numOfRepsAdded to the exercise's reps
-    public void addRep(int numOfRepsAdded) {
+    public int addRep(int numOfRepsAdded) {
         this.reps += numOfRepsAdded;
+        return this.reps;
     }
 
     public String getName() {
@@ -45,5 +47,13 @@ public class Exercise {
 
     public int getReps() {
         return this.reps;
+    }
+
+    public void setSets(int newSetNum) {
+        this.sets = newSetNum;
+    }
+
+    public void setReps(int newRepNum) {
+        this.reps = newRepNum;
     }
 }

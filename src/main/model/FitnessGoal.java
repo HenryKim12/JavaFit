@@ -6,8 +6,8 @@ public class FitnessGoal {
     private String fitnessGoal;
 
     // EFFECTS: constructs a new fitness goal
-    public FitnessGoal() {
-        // stub - what to return here??
+    public FitnessGoal(String goal) {
+        this.fitnessGoal = goal;
     }
 
     public String getGoal() {
