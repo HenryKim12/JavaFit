@@ -3,7 +3,6 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static model.MuscleGroup.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExerciseTest {
@@ -12,17 +11,17 @@ public class ExerciseTest {
 
     @BeforeEach
     private void setUp() {
-        e1 = new Exercise("Bench Press", CHEST, 4, 6);
-        e2 = new Exercise("Lat Pulldown", BACK, 4, 12);
-        e3 = new Exercise("Bicep Curl", ARMS, 4, 10);
-        e4 = new Exercise("Lateral Raises", SHOULDERS, 3, 12);
-        e5 = new Exercise("Barbell Squat", LEGS, 4, 5);
+        e1 = new Exercise("Bench Press", "chest", 4, 6);
+        e2 = new Exercise("Lat Pulldown", "back", 4, 12);
+        e3 = new Exercise("Bicep Curl", "arms", 4, 10);
+        e4 = new Exercise("Lateral Raises", "shoulders", 3, 12);
+        e5 = new Exercise("Barbell Squat", "legs", 4, 5);
     }
 
     @Test
     public void testExercise() {
         assertEquals("Bench Press", e1.getName());
-        assertEquals(CHEST, e1.getMuscleGroup());
+        assertEquals("chest", e1.getMuscleGroup());
         assertEquals(4, e1.getSets());
         assertEquals(6, e1.getReps());
     }
@@ -37,5 +36,19 @@ public class ExerciseTest {
     public void testAddRep() {
         assertEquals(6, e5.addRep(1));
         assertEquals(15, e3.addRep(5));
+    }
+
+    @Test
+    public void testSetSets() {
+        assertEquals(4, e1.getSets());
+        e1.setSets(6);
+        assertEquals(6, e1.getSets());
+    }
+
+    @Test
+    public void testSetReps() {
+        assertEquals(5, e5.getReps());
+        e5.setReps(3);
+        assertEquals(3, e5.getReps());
     }
 }

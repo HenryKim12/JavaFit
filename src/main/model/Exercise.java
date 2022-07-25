@@ -4,13 +4,13 @@ package model;
 public class Exercise {
 
     private String name;
-    private MuscleGroup muscleGroup;
+    private String muscleGroup;
     private int sets;
     private int reps;
 
     // REQUIRES: name is not an empty string, sets and reps > 0
     // EFFECTS: constructs a new exercise with name, muscle, sets, and reps
-    public Exercise(String name, MuscleGroup muscleGroup, int sets, int reps) {
+    public Exercise(String name, String muscleGroup, int sets, int reps) {
         this.name = name;
         this.muscleGroup = muscleGroup;
         this.sets = sets;
@@ -37,7 +37,7 @@ public class Exercise {
         return this.name;
     }
 
-    public MuscleGroup getMuscleGroup() {
+    public String getMuscleGroup() {
         return this.muscleGroup;
     }
 
