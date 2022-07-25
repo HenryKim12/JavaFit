@@ -18,19 +18,16 @@ public class Workout {
     }
 
     // MODIFIES: this
-    // EFFECTS: if the given exercise is not in the workout,
-    //          then add the exercise; otherwise, add the
-    //          sets and reps to the same exercise in the list
+    // EFFECTS: if the given exercise is in the workout, then add the
+    //          sets and reps to the same exercise in the list;
+    //          otherwise, add the exercise to the list
     public void addExercise(Exercise e) {
-        if (!workout.contains(e)) {
-            workout.add(e);
+        if (workout.contains(e)) {
+            int pos = workout.indexOf(e);
+            workout.get(pos).addSet(e.getSets());
+            workout.get(pos).addRep(e.getReps());
         } else {
-            for (Exercise exercise : workout) {
-                if (exercise.getName() == e.getName()) {
-                    exercise.addSet(e.getSets());
-                    exercise.addRep(e.getReps());
-                }
-            }
+            workout.add(e);
         }
     }
 
@@ -64,6 +61,8 @@ public class Workout {
         return this.workout;
     }
 
+    // EFFECTS: retrieves the exercise from the workout at
+    //          the given index
     public Exercise getExercise(ArrayList<Exercise> workout, int index) {
         this.workout = workout;
         return workout.get(index);

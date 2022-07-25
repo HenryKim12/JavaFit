@@ -70,4 +70,12 @@ public class ListOfFitnessGoalsTest {
         assertEquals(1, testFitnessList.getAllFitnessGoals().size());
         assertTrue(testFitnessList.getAllFitnessGoals().contains(fg1));
     }
+
+    @Test
+    public void testGetFitnessGoal() {
+        assertTrue(testFitnessList.addFitnessGoal(fg1));
+        assertTrue(testFitnessList.addFitnessGoal(fg2));
+        assertEquals(fg1.getGoal(), testFitnessList.getFitnessGoal(0));
+        assertEquals(fg2.getGoal(), testFitnessList.getFitnessGoal(1));
+    }
 }

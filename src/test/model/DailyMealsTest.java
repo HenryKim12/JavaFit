@@ -64,6 +64,14 @@ public class DailyMealsTest {
     }
 
     @Test
+    public void testGetMeal() {
+        assertTrue(testAllMeals.addMeal(m1));
+        assertTrue(testAllMeals.addMeal(m2));
+        assertEquals(m1, testAllMeals.getMeal(0));
+        assertEquals(m2, testAllMeals.getMeal(1));
+    }
+
+    @Test
     public void testGetTotalCalories() {
         assertTrue(testAllMeals.addMeal(m1));
         assertTrue(testAllMeals.addMeal(m2));

@@ -17,7 +17,7 @@ public class DailyMeals {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds the given meal to the list and produce true
+    // EFFECTS: adds the given meal to the list and produces true
     public boolean addMeal(Meal m) {
         this.eatenToday.add(m);
         return true;
@@ -33,6 +33,11 @@ public class DailyMeals {
             return true;
         }
         return false;
+    }
+
+    // EFFECTS: retrieves the meal at the given index
+    public Meal getMeal(int index) {
+        return this.eatenToday.get(index);
     }
 
     // EFFECTS: produces all the meals in a list

@@ -14,8 +14,8 @@ public class ListOfFitnessGoals {
 
     // MODIFIES: this
     // EFFECTS: if the given fitness goal is not in the list,
-    //          then add the fitness goal and produce true
-    //          ;otherwise, produce false
+    //          then add the fitness goal and produce true;
+    //          otherwise, produce false
     public boolean addFitnessGoal(FitnessGoal fg) {
         if (!allFitnessGoals.contains(fg)) {
             allFitnessGoals.add(fg);
@@ -34,6 +34,10 @@ public class ListOfFitnessGoals {
             return true;
         }
         return false;
+    }
+
+    public String getFitnessGoal(int index) {
+        return this.allFitnessGoals.get(index).getGoal();
     }
 
     public ArrayList<FitnessGoal> getAllFitnessGoals() {

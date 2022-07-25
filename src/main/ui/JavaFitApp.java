@@ -108,7 +108,6 @@ public class JavaFitApp {
         input.nextLine();
         String fitnessGoal = input.nextLine();
         FitnessGoal fg = new FitnessGoal(fitnessGoal);
-        this.fitnessGoals = new ListOfFitnessGoals();
         this.fitnessGoals.addFitnessGoal(fg);
 
         printListOfFitnessGoals();
@@ -128,7 +127,6 @@ public class JavaFitApp {
         int fats = input.nextInt();
         System.out.println("Amount of protein in grams:");
         int protein = input.nextInt();
-        this.meals = new DailyMeals();
         Meal m = new Meal(food, calories, carbohydrates, fats, protein);
         this.meals.addMeal(m);
 
@@ -182,25 +180,39 @@ public class JavaFitApp {
     // EFFECTS: prints the workout to the screen
     private void printWorkout(Workout selected) {
         System.out.println("Today's workout: ");
+        System.out.println(" ");
         for (Exercise e : selected.getWorkout()) {
-            System.out.println(e.getName());
+            System.out.println("-" + " " + e.getName() + " " + e.getSets() + "x" + e.getReps());
         }
     }
 
     // EFFECTS: prints all fitness goals to the screen
     private void printListOfFitnessGoals() {
         System.out.println("All my fitness goals:");
-//        for (FitnessGoal fg : this.fitnessGoals) {
-//            System.out.println(fg.getGoal());
-//        }
+        System.out.println(" ");
+        for (int i = 0; i <= this.fitnessGoals.getAllFitnessGoals().size() - 1; i++) {
+            System.out.println("-" + " " + this.fitnessGoals.getFitnessGoal(i));
+        }
     }
 
     // EFFECTS: prints out all meals and macros for that day
     private void printTotalDailyIntake() {
-        System.out.println("Today's meals: " + this.meals.getDailyMeals());
-        System.out.println("Calories: " + this.meals.getTotalCalories());
-        System.out.println("Carbohydrates: " + this.meals.getTotalCarbohydrates());
-        System.out.println("Fats: " + this.meals.getTotalFats());
-        System.out.println("Protein: " + this.meals.getTotalProtein());
+        System.out.println("Today's meals:");
+        System.out.println(" ");
+        for (int i = 0; i <= this.meals.getDailyMeals().size() - 1; i++) {
+            System.out.println("Meal #" + (i + 1));
+            System.out.println("Food: " + this.meals.getMeal(i).getName());
+            System.out.println("Calories: " + this.meals.getMeal(i).getCalories());
+            System.out.println("Carbohydrates: " + this.meals.getMeal(i).getCarbohydrates());
+            System.out.println("Fats: " + this.meals.getMeal(i).getFats());
+            System.out.println("Protein: " + this.meals.getMeal(i).getProtein());
+            System.out.println(" ");
+        }
+
+        System.out.println(" ");
+        System.out.println("Total Calories: " + this.meals.getTotalCalories());
+        System.out.println("Total Carbohydrates: " + this.meals.getTotalCarbohydrates());
+        System.out.println("Total Fats: " + this.meals.getTotalFats());
+        System.out.println("Total Protein: " + this.meals.getTotalProtein());
     }
 }
