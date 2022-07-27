@@ -12,7 +12,8 @@ In this app, *you* will be able to...
 - ***enter your workouts***
 - ***AND MORE!*** 
 
-This project is interesting to me because I love fitness and health. I enjoy working out and progressively making my body stronger/healthier.
+This project is interesting to me because I love fitness and health. I enjoy working out and progressively making 
+my body stronger/healthier.
 
 ## User Stories
 
@@ -20,4 +21,8 @@ This project is interesting to me because I love fitness and health. I enjoy wor
 - As a user, I want to be able to insert my calories for my meal and add its macros.
 - As a user, I want to be able to add a new goal into a list of my fitness goals.
 - As a user, I want to be able to view my workout.
+
+Phase 2 User Stories:
+- As a user, I want to be able to save my workouts, fitness goals, and daily meals to file.
+- As a user, I want to be able to reload my workouts, fitness goals, and meals from the last time they were saved.
  

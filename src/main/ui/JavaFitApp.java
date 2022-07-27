@@ -47,8 +47,8 @@ public class JavaFitApp {
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
-        if (command.equals("e")) {
-            addExercise();
+        if (command.equals("w")) {
+            editWorkout();
         } else if (command.equals("f")) {
             addFitnessGoal();
         } else if (command.equals("m")) {
@@ -75,11 +75,30 @@ public class JavaFitApp {
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         System.out.println("\nSelect from:");
-        System.out.println("\te -> add exercise");
+        System.out.println("\tw -> edit workouts");
         System.out.println("\tf -> add fitness goal");
         System.out.println("\tm -> add meal");
         System.out.println("\tv -> view all");
         System.out.println("\tq -> quit");
+    }
+
+    // EFFECTS: allows you to choose between adding and removing an exercise from a workout
+    private void editWorkout() {
+        String selection = "";
+        System.out.println("Do you wish to add or remove an exercise?");
+
+        while (! (selection.equals("add") || selection.equals("remove"))) {
+            System.out.println("- add");
+            System.out.println("- remove");
+            selection = input.next();
+            selection = selection.toLowerCase();
+        }
+
+        if (selection.equals("add")) {
+            addExercise();
+        } else {
+            removeExercise();
+        }
     }
 
     // MODIFIES: this
@@ -102,6 +121,26 @@ public class JavaFitApp {
     }
 
     // MODIFIES: this
+    // EFFECTS: if the exercise is already in the list, remove it;
+    //          otherwise, do not change the workout
+    private void removeExercise() {
+        Workout selected = selectWorkout();
+        System.out.println("Enter name of exercise to remove:");
+        input.nextLine();
+        String exercise = input.nextLine();
+
+        for (Exercise e : selected.getWorkout()) {
+            if (e.getName() == exercise) {
+                selected.removeExercise(e);
+                System.out.println("Successfully removed the given exercise.");
+            } else {
+                System.out.println("Given exercise is not in this workout.");
+            }
+        }
+        printWorkout(selected);
+    }
+
+    // MODIFIES: this
     // EFFECTS: adds a fitness goal to the list
     private void addFitnessGoal() {
         System.out.println("Enter a new fitness goal:");
@@ -116,7 +155,7 @@ public class JavaFitApp {
     // MODIFIES: this
     // EFFECTS: adds the meal including its macros
     private void addMeal() {
-        System.out.println("Enter your meal:");
+        System.out.println("Enter the name of your meal:");
         input.nextLine();
         String food = input.nextLine();
         System.out.println("Number of calories:");
@@ -139,9 +178,9 @@ public class JavaFitApp {
         System.out.println("What do you wish to view?");
 
         while (!(selection.equals("workouts") || selection.equals("fitness goals") || selection.equals("meals"))) {
-            System.out.println("-" + " " + "workouts");
-            System.out.println("-" + " " + "fitness goals");
-            System.out.println("-" + " " + "meals");
+            System.out.println("- workouts");
+            System.out.println("- fitness goals");
+            System.out.println("- meals");
             selection = input.next();
             selection = selection.toLowerCase();
         }
@@ -161,9 +200,9 @@ public class JavaFitApp {
         System.out.println("Select workout:");
 
         while (!(selection.equals("push") || selection.equals("pull") || selection.equals("legs"))) {
-            System.out.println("-" + " " + "push");
-            System.out.println("-" + " " + "pull");
-            System.out.println("-" + " " + "legs");
+            System.out.println("- push");
+            System.out.println("- pull");
+            System.out.println("- legs");
             selection = input.next();
             selection = selection.toLowerCase();
         }
