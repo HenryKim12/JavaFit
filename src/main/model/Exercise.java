@@ -1,7 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
+import java.util.Objects;
+
 // Represents an exercise having a name, muscle group, number of sets, and number of reps
-public class Exercise {
+public class Exercise implements Writable {
 
     private String name;
     private String muscleGroup;
@@ -55,5 +60,30 @@ public class Exercise {
 
     public void setReps(int newRepNum) {
         this.reps = newRepNum;
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        boolean isEqual = false;
+        if (otherObject instanceof Exercise) {
+            Exercise otherExercise = (Exercise) otherObject;
+            isEqual = this.name.equals(otherExercise.getName());
+        }
+        return isEqual;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, muscleGroup, sets, reps);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("muscleGroup", muscleGroup);
+        json.put("sets", sets);
+        json.put("reps", reps);
+        return json;
     }
 }

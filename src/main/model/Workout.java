@@ -1,11 +1,14 @@
 package model;
 
 import com.sun.corba.se.spi.orbutil.threadpool.Work;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.ArrayList;
 
 // Represents a workout as a list of exercises
-public class Workout {
+public class Workout implements Writable {
 
     private String title;
     private ArrayList<Exercise> workout;
@@ -66,5 +69,23 @@ public class Workout {
     public Exercise getExercise(ArrayList<Exercise> workout, int index) {
         this.workout = workout;
         return workout.get(index);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("exercises", exercisesToJson());
+        return json;
+    }
+
+    public JSONArray exercisesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Exercise e : workout) {
+            jsonArray.put(e.toJson());
+        }
+
+        return jsonArray;
     }
 }

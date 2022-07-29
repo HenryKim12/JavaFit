@@ -2,7 +2,11 @@ package ui;
 
 import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // JavaFit application
@@ -129,14 +133,17 @@ public class JavaFitApp {
         input.nextLine();
         String exercise = input.nextLine();
 
+        // find the position of the exercise then remove it afterwards
+        int removedExercisePos = 1000;
         for (Exercise e : selected.getWorkout()) {
-            if (e.getName() == exercise) {
-                selected.removeExercise(e);
-                System.out.println("Successfully removed the given exercise.");
+            if (e.getName().equals(exercise)) {
+                removedExercisePos = selected.getWorkout().indexOf(e);
             } else {
                 System.out.println("Given exercise is not in this workout.");
             }
         }
+        selected.getWorkout().remove(removedExercisePos);
+
         printWorkout(selected);
     }
 
