@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a fitness goal as a sentence
-public class FitnessGoal {
+public class FitnessGoal implements Writable {
 
     private String fitnessGoal;
 
@@ -12,5 +15,12 @@ public class FitnessGoal {
 
     public String getGoal() {
         return this.fitnessGoal;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("fitness goal", fitnessGoal);
+        return json;
     }
 }

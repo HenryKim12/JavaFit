@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // Represents a list of all fitness goals
-public class ListOfFitnessGoals {
+public class ListOfFitnessGoals implements Writable {
 
     private ArrayList<FitnessGoal> allFitnessGoals;
 
@@ -42,5 +46,23 @@ public class ListOfFitnessGoals {
 
     public ArrayList<FitnessGoal> getAllFitnessGoals() {
         return this.allFitnessGoals;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("fitness goals", fitnessGoalsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns fitness goals in the list as a JSON array
+    public JSONArray fitnessGoalsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (FitnessGoal fg : allFitnessGoals) {
+            jsonArray.put(fg.toJson());
+        }
+
+        return jsonArray;
     }
 }

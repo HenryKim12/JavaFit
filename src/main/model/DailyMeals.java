@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // Represents all the meals eaten in the day
-public class DailyMeals {
+public class DailyMeals implements Writable {
 
     private ArrayList<Meal> eatenToday;
     private int totalCalories;
@@ -79,5 +83,23 @@ public class DailyMeals {
             this.totalProtein += m.getProtein();
         }
         return this.totalProtein;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("all meals", allMealsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns all meals eaten as a JSON array
+    public JSONArray allMealsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Meal m : eatenToday) {
+            jsonArray.put(m.toJson());
+        }
+
+        return jsonArray;
     }
 }
