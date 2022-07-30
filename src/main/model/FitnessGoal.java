@@ -20,7 +20,7 @@ public class FitnessGoal implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("fitness goal", fitnessGoal);
+        json.put("goal", fitnessGoal);
         return json;
     }
 }

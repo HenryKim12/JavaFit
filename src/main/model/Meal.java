@@ -44,7 +44,11 @@ public class Meal implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("meal", name);
+        json.put("name", name);
+        json.put("calories", calories);
+        json.put("carbohydrates", carbohydrates);
+        json.put("fats", fats);
+        json.put("protein", protein);
         return json;
     }
 }

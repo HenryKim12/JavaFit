@@ -13,16 +13,18 @@ import java.util.Scanner;
 // based on Teller app; link below:
 // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
 public class JavaFitApp {
-
+    private static final String JSON_STORE = "./data/account.json";
     private Workout push;
     private Workout pull;
     private Workout legs;
     private ListOfFitnessGoals fitnessGoals;
     private DailyMeals meals;
     private Scanner input;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the JavaFit application
-    public JavaFitApp() {
+    public JavaFitApp() throws FileNotFoundException {
         runJavaFit();
     }
 
@@ -59,6 +61,10 @@ public class JavaFitApp {
             addMeal();
         } else if (command.equals("v")) {
             viewAll();
+        } else if (command.equals("l")) {
+            loadAll();
+        } else if (command.equals("s")) {
+            saveAll();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -72,6 +78,8 @@ public class JavaFitApp {
         legs = new Workout("Leg Day");
         fitnessGoals = new ListOfFitnessGoals();
         meals = new DailyMeals();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -83,6 +91,8 @@ public class JavaFitApp {
         System.out.println("\tf -> add fitness goal");
         System.out.println("\tm -> add meal");
         System.out.println("\tv -> view all");
+        System.out.println("\tl -> load all from file");
+        System.out.println("\ts -> save all to file");
         System.out.println("\tq -> quit");
     }
 
@@ -260,5 +270,41 @@ public class JavaFitApp {
         System.out.println("Total Carbohydrates: " + this.meals.getTotalCarbohydrates());
         System.out.println("Total Fats: " + this.meals.getTotalFats());
         System.out.println("Total Protein: " + this.meals.getTotalProtein());
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workouts, fitness goals, and meals from file
+    public void loadAll() {
+        try {
+            push = jsonReader.readWorkout();
+            pull = jsonReader.readWorkout();
+            legs = jsonReader.readWorkout();
+            fitnessGoals = jsonReader.readListOfFitnessGoals();
+            meals = jsonReader.readMeals();
+            System.out.println("Loaded " + push.getWorkoutTitle() + "," + pull.getWorkoutTitle() + ","
+                    + legs.getWorkoutTitle() + " fitness goals, and meals from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+    // EFFECTS: saves the workouts, fitness goals, and meals to file
+    public void saveAll() {
+        try {
+            jsonWriter.open();
+            jsonWriter.writeWorkout(push);
+            jsonWriter.writeWorkout(pull);
+            jsonWriter.writeWorkout(legs);
+            jsonWriter.writeFitnessGoals(fitnessGoals);
+            jsonWriter.writeMeals(meals);
+            jsonWriter.close();
+            System.out.println("Saved " + push.getWorkoutTitle() + " to " + JSON_STORE);
+            System.out.println("Saved " + pull.getWorkoutTitle() + " to " + JSON_STORE);
+            System.out.println("Saved " + legs.getWorkoutTitle() + " to " + JSON_STORE);
+            System.out.println("Saved all fitness goals to " + JSON_STORE);
+            System.out.println("Saved all meals to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
     }
 }

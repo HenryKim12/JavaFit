@@ -23,12 +23,28 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workouts, fitness goals, and meals from file and returns it;
+    // EFFECTS: reads workouts from file and returns it;
     //          throws IOException if an error occurs reading data from file
-    public Workout read() throws IOException {
+    public Workout readWorkout() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseWorkout(jsonObject);
+    }
+
+    // EFFECTS: reads fitness goals from file and returns it;
+    //          throws IOException if an error occurs reading data from file
+    public ListOfFitnessGoals readListOfFitnessGoals() throws IOException {
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseListOfFitnessGoals(jsonObject);
+    }
+
+    // EFFECTS: reads meals from file and returns it;
+    //          throws IOException if an error occurs reading data from file
+    public DailyMeals readMeals() throws IOException {
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseDailyMeals(jsonObject);
     }
 
     // EFFECTS: reads source file as string and returns it
@@ -45,9 +61,9 @@ public class JsonReader {
     // MODIFIES: workout
     // EFFECTS: parses workout from JSON object and returns it
     private Workout parseWorkout(JSONObject jsonObject) {
-        String name = jsonObject.getString("title");
-        Workout workout = new Workout(name);
-        addExercise(workout, jsonObject);
+        String title = jsonObject.getString("title");
+        Workout workout = new Workout(title);
+        addExercises(workout, jsonObject);
         return workout;
     }
 
@@ -76,7 +92,7 @@ public class JsonReader {
     // EFFECTS: parses list of fitness goals from JSON object and returns it
     private ListOfFitnessGoals parseListOfFitnessGoals(JSONObject jsonObject) {
         ListOfFitnessGoals allGoals = new ListOfFitnessGoals();
-        addFitnessGoal(allGoals, jsonObject);
+        addFitnessGoals(allGoals, jsonObject);
         return allGoals;
     }
 
@@ -102,7 +118,7 @@ public class JsonReader {
     // EFFECTS: parses list of meals from JSON object and returns it
     private DailyMeals parseDailyMeals(JSONObject jsonObject) {
         DailyMeals eatenToday = new DailyMeals();
-        addMeal(eatenToday, jsonObject);
+        addMeals(eatenToday, jsonObject);
         return eatenToday;
     }
 

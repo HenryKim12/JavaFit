@@ -88,7 +88,7 @@ public class DailyMeals implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("all meals", allMealsToJson());
+        json.put("eaten today", allMealsToJson());
         return json;
     }
 

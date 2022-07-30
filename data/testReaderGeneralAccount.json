@@ -1,0 +1,69 @@
+{
+  "exercises": [
+    {
+      "name": "bench press",
+      "muscleGroup": "chest",
+      "sets": 4,
+      "reps": 8
+    },
+    {
+      "name": "incline dumbbell press",
+      "muscleGroup": "chest",
+      "sets": 4,
+      "reps": 12
+    },
+    {
+      "name": "flys",
+      "muscleGroup": "chest",
+      "sets": 4,
+      "reps": 10
+    }
+  ],
+  "title": "Push Day",
+
+  "exercises": [
+    {
+      "name": "lat pulldown",
+      "muscleGroup": "back",
+      "sets": 4,
+      "reps": 12
+    }
+  ],
+  "title": "Pull Day",
+
+  "exercises": [
+    {
+      "name": "squat",
+      "muscleGroup": "legs",
+      "sets": 4,
+      "reps": 10
+    }
+  ],
+  "title": "Leg Day",
+
+  "fitness goals": [
+    {
+      "goal": "I want to lose 10 pounds in 6 months"
+    },
+    {
+      "goal": "I want to strengthen my back"
+    }
+  ],
+
+  "eaten today": [
+    {
+      "name": "chicken and rice",
+      "calories": 500,
+      "carbohydrates": 5,
+      "fats": 2,
+      "protein": 12
+    },
+    {
+      "name": "ice cream",
+      "calories": 250,
+      "carbohydrates": 0,
+      "fats": 1,
+      "protein": 2
+    }
+  ]
+}
