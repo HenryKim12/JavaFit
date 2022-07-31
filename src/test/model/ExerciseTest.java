@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ExerciseTest {
 
-    private Exercise e1, e2, e3, e4, e5;
+    private Exercise e1, e2, e3, e4, e5, e6;
 
     @BeforeEach
     private void setUp() {
@@ -17,6 +17,7 @@ public class ExerciseTest {
         e3 = new Exercise("Bicep Curl", "arms", 4, 10);
         e4 = new Exercise("Lateral Raises", "shoulders", 3, 12);
         e5 = new Exercise("Barbell Squat", "legs", 4, 5);
+        e6 = new Exercise("Bench Press", "arms", 1, 1);
     }
 
     @Test
@@ -55,12 +56,12 @@ public class ExerciseTest {
 
     @Test
     public void testEquals() {
-        assertFalse(e1.equals(e2));
+        assertTrue(e1.equals(e6));
+        assertFalse(e1.equals("hello"));
     }
 
     @Test
     public void testToJson() {
-        JSONObject o = new JSONObject();
-        assertTrue(o.isNull("o"));
+        assertEquals(null, e1.toJson());
     }
 }

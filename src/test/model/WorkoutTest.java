@@ -85,7 +85,6 @@ public class WorkoutTest {
 
     @Test
     public void testToJson() {
-        JSONObject o = new JSONObject();
-        assertTrue(o.isNull("o"));
+        assertEquals(null, testWorkout.toJson());
     }
 }
