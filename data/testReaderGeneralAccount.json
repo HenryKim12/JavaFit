@@ -21,26 +21,6 @@
   ],
   "title": "Push Day",
 
-  "exercises": [
-    {
-      "name": "lat pulldown",
-      "muscleGroup": "back",
-      "sets": 4,
-      "reps": 12
-    }
-  ],
-  "title": "Pull Day",
-
-  "exercises": [
-    {
-      "name": "squat",
-      "muscleGroup": "legs",
-      "sets": 4,
-      "reps": 10
-    }
-  ],
-  "title": "Leg Day",
-
   "fitness goals": [
     {
       "goal": "I want to lose 10 pounds in 6 months"

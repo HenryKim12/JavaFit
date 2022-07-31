@@ -77,13 +77,35 @@ public class Exercise implements Writable {
         return Objects.hash(name, muscleGroup, sets, reps);
     }
 
-    @Override
-    public JSONObject toJson() {
+    public JSONObject toJsonPush() {
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("muscleGroup", muscleGroup);
         json.put("sets", sets);
         json.put("reps", reps);
         return json;
+    }
+
+    public JSONObject toJsonPull() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("muscleGroup", muscleGroup);
+        json.put("sets", sets);
+        json.put("reps", reps);
+        return json;
+    }
+
+    public JSONObject toJsonLegs() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("muscleGroup", muscleGroup);
+        json.put("sets", sets);
+        json.put("reps", reps);
+        return json;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        return null;
     }
 }

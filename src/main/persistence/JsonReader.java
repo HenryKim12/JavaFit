@@ -25,10 +25,22 @@ public class JsonReader {
 
     // EFFECTS: reads workouts from file and returns it;
     //          throws IOException if an error occurs reading data from file
-    public Workout readWorkout() throws IOException {
+    public Workout readPushWorkout() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
-        return parseWorkout(jsonObject);
+        return parsePushWorkout(jsonObject);
+    }
+
+    public Workout readPullWorkout() throws IOException {
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parsePullWorkout(jsonObject);
+    }
+
+    public Workout readLegsWorkout() throws IOException {
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseLegsWorkout(jsonObject);
     }
 
     // EFFECTS: reads fitness goals from file and returns it;
@@ -60,16 +72,46 @@ public class JsonReader {
 
     // MODIFIES: workout
     // EFFECTS: parses workout from JSON object and returns it
-    private Workout parseWorkout(JSONObject jsonObject) {
+    private Workout parsePushWorkout(JSONObject jsonObject) {
         String title = jsonObject.getString("title");
         Workout workout = new Workout(title);
-        addExercises(workout, jsonObject);
+        addPushExercises(workout, jsonObject);
+        return workout;
+    }
+
+    private Workout parsePullWorkout(JSONObject jsonObject) {
+        String title = jsonObject.getString("title");
+        Workout workout = new Workout(title);
+        addPullExercises(workout, jsonObject);
+        return workout;
+    }
+
+    private Workout parseLegsWorkout(JSONObject jsonObject) {
+        String title = jsonObject.getString("title");
+        Workout workout = new Workout(title);
+        addLegsExercises(workout, jsonObject);
         return workout;
     }
 
     // MODIFIES: workout
     // EFFECTS: parses exercises from JSON object and adds them to workout
-    private void addExercises(Workout workout, JSONObject jsonObject) {
+    private void addPushExercises(Workout workout, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("exercises");
+        for (Object json : jsonArray) {
+            JSONObject nextExercise = (JSONObject) json;
+            addExercise(workout, nextExercise);
+        }
+    }
+
+    private void addPullExercises(Workout workout, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("exercises");
+        for (Object json : jsonArray) {
+            JSONObject nextExercise = (JSONObject) json;
+            addExercise(workout, nextExercise);
+        }
+    }
+
+    private void addLegsExercises(Workout workout, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("exercises");
         for (Object json : jsonArray) {
             JSONObject nextExercise = (JSONObject) json;

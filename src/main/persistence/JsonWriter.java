@@ -29,8 +29,18 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of workout to file
-    public void writeWorkout(Workout workout) {
-        JSONObject json = workout.toJson();
+    public void writePushWorkout(Workout workout) {
+        JSONObject json = workout.toJsonPush();
+        saveToFile(json.toString(TAB));
+    }
+
+    public void writePullWorkout(Workout workout) {
+        JSONObject json = workout.toJsonPull();
+        saveToFile(json.toString(TAB));
+    }
+
+    public void writeLegsWorkout(Workout workout) {
+        JSONObject json = workout.toJsonLegs();
         saveToFile(json.toString(TAB));
     }
 

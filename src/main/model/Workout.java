@@ -71,22 +71,60 @@ public class Workout implements Writable {
         return workout.get(index);
     }
 
-    @Override
-    public JSONObject toJson() {
+    public JSONObject toJsonPush() {
         JSONObject json = new JSONObject();
         json.put("title", title);
-        json.put("exercises", exercisesToJson());
+        json.put("exercises", exercisesToJsonPush());
+        return json;
+    }
+
+    public JSONObject toJsonPull() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("exercises", exercisesToJsonPull());
+        return json;
+    }
+
+    public JSONObject toJsonLegs() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("exercises", exercisesToJsonLegs());
         return json;
     }
 
     // EFFECTS: returns exercises in the workout as a JSON array
-    public JSONArray exercisesToJson() {
+    public JSONArray exercisesToJsonPush() {
         JSONArray jsonArray = new JSONArray();
 
         for (Exercise e : workout) {
-            jsonArray.put(e.toJson());
+            jsonArray.put(e.toJsonPush());
         }
 
         return jsonArray;
+    }
+
+    public JSONArray exercisesToJsonPull() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Exercise e : workout) {
+            jsonArray.put(e.toJsonPull());
+        }
+
+        return jsonArray;
+    }
+
+    public JSONArray exercisesToJsonLegs() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Exercise e : workout) {
+            jsonArray.put(e.toJsonLegs());
+        }
+
+        return jsonArray;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        return null;
     }
 }

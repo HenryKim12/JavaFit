@@ -28,11 +28,11 @@ public class JsonWriterTest extends JsonTest {
             Workout workout = new Workout("Push Day");
             JsonWriter writer = new JsonWriter("./data/testWriterEmptyAccount.json");
             writer.open();
-            writer.writeWorkout(workout);
+            writer.writePushWorkout(workout);
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterEmptyAccount.json");
-            workout = reader.readWorkout();
+            workout = reader.readPushWorkout();
             assertEquals("Push Day", workout.getWorkoutTitle());
             assertEquals(0, workout.getWorkout().size());
         } catch (IOException e) {
@@ -73,11 +73,11 @@ public class JsonWriterTest extends JsonTest {
             workout.addExercise(new Exercise("bench", "chest", 4, 8));
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralAccount.json");
             writer.open();
-            writer.writeWorkout(workout);
+            writer.writePushWorkout(workout);
             writer.close();
 
             JsonReader reader = new JsonReader("./data/testWriterGeneralAccount.json");
-            workout = reader.readWorkout();
+            workout = reader.readPushWorkout();
             assertEquals("Push Day", workout.getWorkoutTitle());
             ArrayList<Exercise> exercises = workout.getWorkout();
             assertEquals(1, exercises.size());
