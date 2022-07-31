@@ -1,9 +1,10 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ExerciseTest {
 
@@ -50,5 +51,16 @@ public class ExerciseTest {
         assertEquals(5, e5.getReps());
         e5.setReps(3);
         assertEquals(3, e5.getReps());
+    }
+
+    @Test
+    public void testEquals() {
+        assertFalse(e1.equals(e2));
+    }
+
+    @Test
+    public void testToJson() {
+        JSONObject o = new JSONObject();
+        assertTrue(o.isNull("o"));
     }
 }

@@ -1,7 +1,7 @@
 {
     "exercises": [{
-        "reps": 5,
-        "sets": 4,
+        "reps": 1,
+        "sets": 1,
         "muscleGroup": "chest",
         "name": "bench"
     }],

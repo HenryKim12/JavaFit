@@ -72,11 +72,6 @@ public class Exercise implements Writable {
         return isEqual;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, muscleGroup, sets, reps);
-    }
-
     public JSONObject toJsonPush() {
         JSONObject json = new JSONObject();
         json.put("name", name);

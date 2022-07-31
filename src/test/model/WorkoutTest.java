@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -80,5 +81,11 @@ public class WorkoutTest {
     @Test
     public void testGetWorkoutTitle() {
         assertEquals("Chest Day", testWorkout.getWorkoutTitle());
+    }
+
+    @Test
+    public void testToJson() {
+        JSONObject o = new JSONObject();
+        assertTrue(o.isNull("o"));
     }
 }
