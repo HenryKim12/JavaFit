@@ -1,6 +1,5 @@
 package model;
 
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
@@ -92,7 +91,7 @@ public class Workout implements Writable {
         return json;
     }
 
-    // EFFECTS: returns exercises in the workout as a JSON array
+    // EFFECTS: returns exercises in the push workout as a JSON array
     public JSONArray exercisesToJsonPush() {
         JSONArray jsonArray = new JSONArray();
 
@@ -103,6 +102,7 @@ public class Workout implements Writable {
         return jsonArray;
     }
 
+    // EFFECTS: returns exercises in the pull workout as a JSON array
     public JSONArray exercisesToJsonPull() {
         JSONArray jsonArray = new JSONArray();
 
@@ -113,6 +113,7 @@ public class Workout implements Writable {
         return jsonArray;
     }
 
+    // EFFECTS: returns exercises in the legs workout as a JSON array
     public JSONArray exercisesToJsonLegs() {
         JSONArray jsonArray = new JSONArray();
 

@@ -34,11 +34,15 @@ public class JsonWriter {
         saveToFile(json.toString(TAB));
     }
 
+    // MODIFIES: this
+    // EFFECTS: writes JSON representation of workout to file
     public void writePullWorkout(Workout workout) {
         JSONObject json = workout.toJsonPull();
         saveToFile(json.toString(TAB));
     }
 
+    // MODIFIES: this
+    // EFFECTS: writes JSON representation of workout to file
     public void writeLegsWorkout(Workout workout) {
         JSONObject json = workout.toJsonLegs();
         saveToFile(json.toString(TAB));

@@ -1,12 +1,10 @@
 package persistence;
 
-import com.sun.xml.internal.ws.policy.spi.PolicyAssertionValidator;
 import org.junit.jupiter.api.Test;
 import model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,8 +22,8 @@ class JsonReaderTest extends JsonTest {
     }
 
     @Test
-    void testReaderEmptyAccount() {
-        JsonReader reader = new JsonReader("./data/testReaderEmptyAccount.json");
+    void testReaderEmptyPushWorkout() {
+        JsonReader reader = new JsonReader("./data/testReaderEmptyPushWorkout.json");
         try {
             Workout workout = reader.readPushWorkout();
             assertEquals("Push Day", workout.getWorkoutTitle());
@@ -33,27 +31,46 @@ class JsonReaderTest extends JsonTest {
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
-//        try {
-//            Workout workout = reader.readPushWorkout();
-//            assertEquals("Pull Day", workout.getWorkoutTitle());
-//            assertEquals(0, workout.getWorkout().size());
-//        } catch (IOException e) {
-//            fail("Couldn't read from file");
-//        }
-//        try {
-//            Workout workout = reader.readPushWorkout();
-//            assertEquals("Leg Day", workout.getWorkoutTitle());
-//            assertEquals(0, workout.getWorkout().size());
-//        } catch (IOException e) {
-//            fail("Couldn't read from file");
-//        }
+    }
+
+    @Test
+    void testReaderEmptyPullWorkout() {
+        JsonReader reader = new JsonReader("./data/testReaderEmptyPullWorkout.json");
+        try {
+            Workout workout = reader.readPullWorkout();
+            assertEquals("Pull Day", workout.getWorkoutTitle());
+            assertEquals(0, workout.getWorkout().size());
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
+
+    @Test
+    void testReaderEmptyLegsWorkout() {
+        JsonReader reader = new JsonReader("./data/testReaderEmptyLegsWorkout.json");
+        try {
+            Workout workout = reader.readLegsWorkout();
+            assertEquals("Leg Day", workout.getWorkoutTitle());
+            assertEquals(0, workout.getWorkout().size());
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
+
+    @Test
+    void testReaderEmptyFitnessGoals() {
+        JsonReader reader = new JsonReader("./data/testReaderEmptyFitnessGoals.json");
         try {
             ListOfFitnessGoals fitnessGoals = reader.readListOfFitnessGoals();
             assertEquals(0, fitnessGoals.getAllFitnessGoals().size());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
+    }
 
+    @Test
+    void testReaderEmptyMeals() {
+        JsonReader reader = new JsonReader("./data/testReaderEmptyMeals.json");
         try {
             DailyMeals eatenToday = reader.readMeals();
             assertEquals(0, eatenToday.getDailyMeals().size());
@@ -63,8 +80,8 @@ class JsonReaderTest extends JsonTest {
     }
 
     @Test
-    void testReaderGeneralAccount() {
-        JsonReader reader = new JsonReader("./data/testReaderGeneralAccount.json");
+    void testReaderGeneralPushWorkout() {
+        JsonReader reader = new JsonReader("./data/testReaderGeneralPushWorkout.json");
         try {
             Workout workout = reader.readPushWorkout();
             assertEquals("Push Day", workout.getWorkoutTitle());
@@ -76,27 +93,40 @@ class JsonReaderTest extends JsonTest {
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
+    }
 
-//        try {
-//            Workout workout = reader.readPushWorkout();
-//            assertEquals("Pull Day", workout.getWorkoutTitle());
-//            ArrayList<Exercise> exercises = workout.getWorkout();
-//            assertEquals(1, exercises.size());
-//            checkExercise("lat pulldown", 4, 12, exercises.get(0));
-//        } catch (IOException e) {
-//            fail("Couldn't read from file");
-//        }
-//
-//        try {
-//            Workout workout = reader.readPushWorkout();
-//            assertEquals("Leg Day", workout.getWorkoutTitle());
-//            ArrayList<Exercise> exercises = workout.getWorkout();
-//            assertEquals(1, exercises.size());
-//            checkExercise("squats", 4, 10, exercises.get(0));
-//        } catch (IOException e) {
-//            fail("Couldn't read from file");
-//        }
+    @Test
+    void testReaderGeneralPullWorkout() {
+        JsonReader reader = new JsonReader("./data/testReaderGeneralPullWorkout.json");
+        try {
+            Workout workout = reader.readPullWorkout();
+            assertEquals("Pull Day", workout.getWorkoutTitle());
+            ArrayList<Exercise> exercises = workout.getWorkout();
+            assertEquals(1, exercises.size());
+            checkExercise("pulldown", 3, 10, exercises.get(0));
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
 
+
+    @Test
+    void testReaderGeneralLegsWorkout() {
+        JsonReader reader = new JsonReader("./data/testReaderGeneralLegsWorkout.json");
+        try {
+            Workout workout = reader.readLegsWorkout();
+            assertEquals("Leg Day", workout.getWorkoutTitle());
+            ArrayList<Exercise> exercises = workout.getWorkout();
+            assertEquals(1, exercises.size());
+            checkExercise("squats", 4, 10, exercises.get(0));
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
+
+    @Test
+    void testReaderGeneralFitnessGoals() {
+        JsonReader reader = new JsonReader("./data/testReaderGeneralFitnessGoals.json");
         try {
             ListOfFitnessGoals fitnessGoals = reader.readListOfFitnessGoals();
             ArrayList<FitnessGoal> allGoals = fitnessGoals.getAllFitnessGoals();
@@ -106,7 +136,11 @@ class JsonReaderTest extends JsonTest {
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
+    }
 
+    @Test
+    void testReaderGeneralMeals() {
+        JsonReader reader = new JsonReader("./data/testReaderGeneralMeals.json");
         try {
             DailyMeals eatenToday = reader.readMeals();
             ArrayList<Meal> allMeals = eatenToday.getDailyMeals();

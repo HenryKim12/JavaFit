@@ -1,0 +1,18 @@
+{
+  "eaten today": [
+    {
+      "name": "chicken and rice",
+      "calories": 500,
+      "carbohydrates": 5,
+      "fats": 2,
+      "protein": 12
+    },
+    {
+      "name": "ice cream",
+      "calories": 250,
+      "carbohydrates": 0,
+      "fats": 1,
+      "protein": 2
+    }
+  ]
+}

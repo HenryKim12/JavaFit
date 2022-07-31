@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.stream.Stream;
 
 import org.json.*;
@@ -23,7 +22,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workouts from file and returns it;
+    // EFFECTS: reads push workout from file and returns it;
     //          throws IOException if an error occurs reading data from file
     public Workout readPushWorkout() throws IOException {
         String jsonData = readFile(source);
@@ -31,12 +30,16 @@ public class JsonReader {
         return parsePushWorkout(jsonObject);
     }
 
+    // EFFECTS: reads pull workout from file and returns it;
+    //          throws IOException if an error occurs reading data from file
     public Workout readPullWorkout() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parsePullWorkout(jsonObject);
     }
 
+    // EFFECTS: reads legs workout from file and returns it;
+    //          throws IOException if an error occurs reading data from file
     public Workout readLegsWorkout() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
@@ -70,8 +73,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // MODIFIES: workout
-    // EFFECTS: parses workout from JSON object and returns it
+    // EFFECTS: parses push workout from JSON object and returns it
     private Workout parsePushWorkout(JSONObject jsonObject) {
         String title = jsonObject.getString("title");
         Workout workout = new Workout(title);
@@ -79,6 +81,7 @@ public class JsonReader {
         return workout;
     }
 
+    // EFFECTS: parses pull workout from JSON object and returns it
     private Workout parsePullWorkout(JSONObject jsonObject) {
         String title = jsonObject.getString("title");
         Workout workout = new Workout(title);
@@ -86,6 +89,7 @@ public class JsonReader {
         return workout;
     }
 
+    // EFFECTS: parses legs workout from JSON object and returns it
     private Workout parseLegsWorkout(JSONObject jsonObject) {
         String title = jsonObject.getString("title");
         Workout workout = new Workout(title);
@@ -103,6 +107,8 @@ public class JsonReader {
         }
     }
 
+    // MODIFIES: workout
+    // EFFECTS: parses exercises from JSON object and adds them to workout
     private void addPullExercises(Workout workout, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("exercises");
         for (Object json : jsonArray) {
@@ -111,6 +117,8 @@ public class JsonReader {
         }
     }
 
+    // MODIFIES: workout
+    // EFFECTS: parses exercises from JSON object and adds them to workout
     private void addLegsExercises(Workout workout, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("exercises");
         for (Object json : jsonArray) {

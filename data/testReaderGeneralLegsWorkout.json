@@ -1,0 +1,11 @@
+{
+  "exercises": [
+    {
+      "name": "squats",
+      "muscleGroup": "legs",
+      "sets": 4,
+      "reps": 10
+    }
+  ],
+  "title": "Leg Day"
+}
