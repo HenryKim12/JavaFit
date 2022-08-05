@@ -1,9 +1,9 @@
 {
     "exercises": [{
         "reps": 1,
-        "sets": 1,
-        "muscleGroup": "v",
-        "name": "v"
+        "sets": 11,
+        "muscleGroup": "s",
+        "name": "s"
     }],
     "title": "Leg Day"
 }

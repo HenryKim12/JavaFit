@@ -2,8 +2,8 @@
     "exercises": [{
         "reps": 1,
         "sets": 1,
-        "muscleGroup": "chest",
-        "name": "bench"
+        "muscleGroup": "1",
+        "name": "a"
     }],
     "title": "Push Day"
 }
