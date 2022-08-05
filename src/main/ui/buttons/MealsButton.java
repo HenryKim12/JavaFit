@@ -8,6 +8,7 @@ public class MealsButton {
     private JFrame frame;
     private JList allMeals;
     private DefaultListModel listModel;
+    private JButton addMeal;
 
     public MealsButton() {
         frame = new JFrame();
@@ -20,16 +21,24 @@ public class MealsButton {
     }
 
     public void setUpMealFrame() {
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-        JButton addMeal = new JButton("Add Meal");
-        buttonPanel.add(addMeal);
-        frame.add(buttonPanel, BorderLayout.WEST);
+        JPanel captionPanel = new JPanel();
+        JLabel caption = new JLabel("All Meals: ");
+        captionPanel.add(caption, BorderLayout.NORTH);
+        frame.add(captionPanel, BorderLayout.NORTH);
 
         JPanel listPanel = new JPanel();
         listModel = new DefaultListModel();
-        listModel.addElement("HI");
         allMeals = new JList(listModel);
-        frame.add(listPanel,BorderLayout.EAST);
+        listPanel.add(allMeals);
+        frame.add(listPanel, BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel();
+        addMeal = new JButton("Add Meal");
+        buttonPanel.add(addMeal, BorderLayout.CENTER);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    public void pressedAddMealButton() {
+
     }
 }

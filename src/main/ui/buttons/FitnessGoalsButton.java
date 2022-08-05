@@ -3,19 +3,23 @@ package ui.buttons;
 import ui.JavaFit;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 // Represents the frame that opens when pressing the FitnessGoal Button on main menu
 // based on ListDemo project
-public class FitnessGoalsButton extends JPanel implements ListSelectionListener {
+public class FitnessGoalsButton implements ListSelectionListener {
 
     private JFrame frame;
-    protected JList listOfGoals;
-    protected DefaultListModel listModel;
+    private JList listOfGoals;
+    private DefaultListModel listModel;
     private JButton addButton;
-    protected JButton completedButton;
+    private JButton completedButton;
     private JTextField newGoalText;
     private AddGoalListener addGoalListener;
 
@@ -57,10 +61,7 @@ public class FitnessGoalsButton extends JPanel implements ListSelectionListener 
 
         JPanel completedPanel = new JPanel();
         completedPanel.setLayout(new BoxLayout(completedPanel, BoxLayout.LINE_AXIS));
-
-//        add(addPanel, BorderLayout.NORTH);
-//        add(listScrollPane, BorderLayout.CENTER);
-//        add(completedPanel, BorderLayout.SOUTH);
+        completedPanel.add(completedButton);
 
         frame.add(addPanel, BorderLayout.NORTH);
         frame.add(listScrollPane, BorderLayout.CENTER);
@@ -87,6 +88,89 @@ public class FitnessGoalsButton extends JPanel implements ListSelectionListener 
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting() == false) {
 
+            if (listOfGoals.getSelectedIndex() == -1) {
+                //No selection, disable fire button.
+                completedButton.setEnabled(false);
+
+            } else {
+                //Selection, enable the fire button.
+                completedButton.setEnabled(true);
+            }
+        }
+    }
+
+    class AddGoalListener implements ActionListener, DocumentListener {
+
+        private JButton button;
+        private boolean isEnabled = false;
+
+        public AddGoalListener(JButton button) {
+            this.button = button;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            String newGoal = newGoalText.getText();
+
+            if (newGoal.equals("") || listModel.contains(newGoal)) {
+                Toolkit.getDefaultToolkit().beep();
+                newGoalText.requestFocusInWindow();
+                newGoalText.selectAll();
+                return;
+            }
+
+            listModel.insertElementAt(newGoalText.getText(), listModel.size());
+
+            newGoalText.requestFocusInWindow();
+            newGoalText.setText("");
+
+            listOfGoals.setSelectedIndex(listModel.size() - 1);
+            listOfGoals.ensureIndexIsVisible(listModel.size() - 1);
+        }
+
+        public void insertUpdate(DocumentEvent e) {
+            if (!isEnabled) {
+                button.setEnabled(true);
+            }
+        }
+
+        public void removeUpdate(DocumentEvent e) {
+            doEmptyTextField(e);
+        }
+
+        public void changedUpdate(DocumentEvent e) {
+            if (!doEmptyTextField(e)) {
+                if (!isEnabled) {
+                    button.setEnabled(true);
+                }
+            }
+        }
+
+        private boolean doEmptyTextField(DocumentEvent e) {
+            if (e.getDocument().getLength() <= 0) {
+                button.setEnabled(false);
+                isEnabled = false;
+                return true;
+            }
+            return false;
+        }
+    }
+
+    class CompletedGoalListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            int selected = listOfGoals.getSelectedIndex();
+            listModel.remove(selected);
+
+            if (listModel.getSize() == 0) {
+                completedButton.setEnabled(false);
+            } else {
+                if (selected == listModel.getSize()) {
+                    selected--;
+                }
+                listOfGoals.setSelectedIndex(selected);
+                listOfGoals.ensureIndexIsVisible(selected);
+            }
+        }
     }
 }
