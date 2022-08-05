@@ -1,47 +1,58 @@
 package ui;
 
+import ui.buttons.FitnessGoalsButton;
+import ui.buttons.MealsButton;
+import ui.buttons.WorkoutsButton;
+
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 
 public class JavaFit implements ActionListener {
 
+    private JFrame frame;
+    private JPanel buttonPanel;
+    private JButton workoutsButton;
+    private JButton fitnessGoalsButton;
+    private JButton mealsButton;
+    private JButton loadButton;
+    private JButton saveButton;
+
     public JavaFit() {
         //Create and set up the window.
-        JFrame frame = new JFrame("JavaFit");
+        frame = new JFrame("JavaFit");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(new Dimension(600, 420));
         frame.setVisible(true);
-        frame.setSize(new Dimension(1000, 1000));
         frame.setLayout(new BorderLayout());
 
         // Displays the window
-        frame.pack();
         frame.setVisible(true);
 
         // graph panel area
 //        JPanel graphPanel = new JPanel();
 
-        JPanel buttonPanel = new JPanel();
+        addingButtonsToMainFrame();
+    }
+
+    public void addingButtonsToMainFrame() {
+        buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        JButton workoutsButton = new JButton("Workouts");
-        workoutsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        workoutsButton = new JButton("Workouts");
+        workoutsButton.addActionListener(this);
 
-            }
-        });
+        fitnessGoalsButton = new JButton("Fitness Goals");
+        fitnessGoalsButton.addActionListener(this);
 
-        JButton fitnessGoalsButton = new JButton("Fitness Goals");
+        mealsButton = new JButton("Meals");
+        mealsButton.addActionListener(this);
 
-        JButton mealsButton = new JButton("Meals");
+        loadButton = new JButton("Load Data");
 
-        JButton loadButton = new JButton("Load Data");
-
-        JButton saveButton = new JButton("Save");
+        saveButton = new JButton("Save");
 
         buttonPanel.add(workoutsButton);
         buttonPanel.add(fitnessGoalsButton);
@@ -52,8 +63,6 @@ public class JavaFit implements ActionListener {
     }
 
     public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new JavaFit();
@@ -63,6 +72,15 @@ public class JavaFit implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if (e.getSource() == workoutsButton) {
+            frame.dispose();
+            WorkoutsButton workoutsButton = new WorkoutsButton();
+        } else if (e.getSource() == fitnessGoalsButton) {
+            frame.dispose();
+            FitnessGoalsButton fitnessGoalsButton = new FitnessGoalsButton();
+        } else if (e.getSource() == mealsButton) {
+            frame.dispose();
+            MealsButton mealsButton = new MealsButton();
+        }
     }
 }
