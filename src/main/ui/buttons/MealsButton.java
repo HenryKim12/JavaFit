@@ -30,7 +30,7 @@ public class MealsButton implements ActionListener {
 
     public MealsButton() {
         frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(new Dimension(420, 420));
         frame.setVisible(true);
         frame.setLayout(new BorderLayout());
@@ -47,8 +47,8 @@ public class MealsButton implements ActionListener {
         JPanel listPanel = new JPanel();
         listModel = new DefaultListModel();
         allMeals = new JList(listModel);
-//        allMeals.setFixedCellHeight(100);
-        listPanel.add(allMeals);
+        JScrollPane listScrollPane = new JScrollPane(allMeals);
+        listPanel.add(listScrollPane);
         frame.add(listPanel, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
@@ -68,7 +68,7 @@ public class MealsButton implements ActionListener {
     class NewMealDetails {
         public NewMealDetails() {
             addMealFrame = new JFrame();
-            addMealFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            addMealFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             addMealFrame.setSize(new Dimension(300, 200));
             addMealFrame.setVisible(true);
             addMealFrame.setLayout(new BorderLayout());

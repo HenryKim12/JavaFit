@@ -1,7 +1,5 @@
 package ui.buttons;
 
-import ui.JavaFit;
-
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -10,10 +8,11 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 // Represents the frame that opens when pressing the FitnessGoal Button on main menu
 // based on ListDemo project
-public class FitnessGoalsButton implements ListSelectionListener {
+public class FitnessGoalsButton implements ActionListener, ListSelectionListener {
 
     private JFrame frame;
     private JList listOfGoals;
@@ -22,16 +21,49 @@ public class FitnessGoalsButton implements ListSelectionListener {
     private JButton completedButton;
     private JTextField newGoalText;
     private AddGoalListener addGoalListener;
+    private JMenuItem loadFitnessGoals;
+    private JMenuItem saveFitnessGoals;
 
     // EFFECTS: creates the frame for the fitness goals button
     public FitnessGoalsButton() {
         frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(new Dimension(420, 420));
         frame.setVisible(true);
         frame.setLayout(new BorderLayout());
 
         setUpFrame();
+        menuSetUp();
+    }
+
+    public void menuSetUp() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Menu");
+        menu.setMnemonic(KeyEvent.VK_A);
+        menuBar.add(menu);
+        JMenu loadSubMenu = new JMenu("Load File");
+        loadSubMenu.setMnemonic(KeyEvent.VK_S);
+        loadFitnessGoals = new JMenuItem("Load Fitness Goals");
+        loadSubMenu.add(loadFitnessGoals);
+
+        JMenu saveSubMenu = new JMenu("Save File");
+        saveSubMenu.setMnemonic(KeyEvent.VK_S);
+        saveFitnessGoals = new JMenuItem("Save Fitness Goals");
+
+        menu.add(loadSubMenu);
+        loadSubMenu.addActionListener(this);
+        menu.add(saveSubMenu);
+        saveSubMenu.addActionListener(this);
+        frame.setJMenuBar(menuBar);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == loadFitnessGoals) {
+            //
+        } else if (e.getSource() == saveFitnessGoals) {
+//            frame.dispose();
+        }
     }
 
     // MODIFIES: this
