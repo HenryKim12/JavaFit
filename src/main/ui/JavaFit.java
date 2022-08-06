@@ -1,5 +1,9 @@
 package ui;
 
+import javafx.scene.chart.Axis;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import ui.buttons.FitnessGoalsButton;
 import ui.buttons.MealsButton;
 import ui.buttons.WorkoutsButton;
@@ -33,6 +37,15 @@ public class JavaFit implements ActionListener {
 
         // graph panel area
 //        JPanel graphPanel = new JPanel();
+//        CategoryAxis categoryAxisX = new CategoryAxis();
+//        NumberAxis numberAxisY = new NumberAxis();
+//        BarChart<String, Number> barChart = new BarChart(categoryAxisX, numberAxisY);
+//        categoryAxisX.setLabel("Category");
+//        numberAxisY.setLabel("Number");
+//        barChart.setTitle("Calories");
+//        categoryAxisX.setLabel("Category");
+//        numberAxisY.setLabel("Value");
+
 
         addingButtonsToMainFrame();
     }
