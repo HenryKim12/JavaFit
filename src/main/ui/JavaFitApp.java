@@ -447,25 +447,11 @@ public class JavaFitApp {
 
     // EFFECTS: saves fitness goals to file
     public void saveFitnessGoals() {
-        try {
-            jsonGoalsWriter.open();
-            jsonGoalsWriter.writeFitnessGoals(fitnessGoals);
-            jsonGoalsWriter.close();
-            System.out.println("Saved fitness goals to " + GOALS_STORE);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + GOALS_STORE);
-        }
+        Main.saveFitnessGoals();
     }
 
     // EFFECTS: saves meals to file
     public void saveDailyMeals() {
-        try {
-            jsonMealsWriter.open();
-            jsonMealsWriter.writeMeals(meals);
-            jsonMealsWriter.close();
-            System.out.println("Saved meals to " + MEALS_STORE);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + MEALS_STORE);
-        }
+        Main.saveDailyMeals();
     }
 }

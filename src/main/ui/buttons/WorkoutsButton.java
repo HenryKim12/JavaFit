@@ -38,11 +38,20 @@ public class WorkoutsButton implements ListSelectionListener {
     public WorkoutsButton() {
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(new Dimension(900, 420));
+        frame.setSize(new Dimension(300, 300));
         frame.setVisible(true);
         frame.setLayout(new BorderLayout());
 
-        setUpFrame();
+        JButton pushButton = new JButton("Push Workout");
+        pushButton.setSize(new Dimension(300, 100));
+        JButton pullButton = new JButton("Pull Workout");
+        JButton legsButton = new JButton("Legs Workout");
+
+        frame.add(pushButton, BorderLayout.NORTH);
+        frame.add(pullButton, BorderLayout.CENTER);
+        frame.add(legsButton, BorderLayout.SOUTH);
+
+//        setUpFrame();
 
         menuBar = new JMenuBar();
         menu = new JMenu("Menu");

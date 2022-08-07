@@ -23,4 +23,9 @@ public class FitnessGoal implements Writable {
         json.put("goal", fitnessGoal);
         return json;
     }
+
+    @Override
+    public String toString() {
+        return fitnessGoal;
+    }
 }

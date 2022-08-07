@@ -1,5 +1,7 @@
 package ui.buttons;
 
+import model.Meal;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -158,6 +160,10 @@ public class MealsButton implements ActionListener {
         }
 
         public void actionPerformed(ActionEvent e) {
+            Meal meal = new Meal(nameValue.getText(), Integer.parseInt(caloriesValue.getText()),
+                    Integer.parseInt(carbohydratesValue.getText()), Integer.parseInt(fatsValue.getText()),
+                    Integer.parseInt(proteinValue.getText()));
+
             String mealName = nameValue.getText();
             String caloriesValueText = caloriesValue.getText();
             String carbohydratesValueText = carbohydratesValue.getText();

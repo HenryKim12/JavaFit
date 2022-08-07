@@ -1,5 +1,11 @@
 package ui.buttons;
 
+import model.FitnessGoal;
+import model.ListOfFitnessGoals;
+import persistence.JsonReader;
+import ui.FitnessGoalsListModel;
+import ui.Main;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -9,28 +15,35 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 // Represents the frame that opens when pressing the FitnessGoal Button on main menu
 // based on ListDemo project
 public class FitnessGoalsButton implements ActionListener, ListSelectionListener {
 
     private JFrame frame;
+    private FitnessGoalsListModel listModel;
     private JList listOfGoals;
-    private DefaultListModel listModel;
     private JButton addButton;
     private JButton completedButton;
     private JTextField newGoalText;
     private AddGoalListener addGoalListener;
     private JMenuItem loadFitnessGoals;
     private JMenuItem saveFitnessGoals;
+    private JMenuItem returnToMainMenu;
+    private ListOfFitnessGoals fitnessGoals;
 
     // EFFECTS: creates the frame for the fitness goals button
-    public FitnessGoalsButton() {
+    public FitnessGoalsButton(ListOfFitnessGoals fitnessGoals) {
+        this.fitnessGoals = fitnessGoals;
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(new Dimension(420, 420));
         frame.setVisible(true);
         frame.setLayout(new BorderLayout());
+
+        listModel = new FitnessGoalsListModel(fitnessGoals);
+        listOfGoals = new JList(listModel);
 
         setUpFrame();
         menuSetUp();
@@ -41,38 +54,34 @@ public class FitnessGoalsButton implements ActionListener, ListSelectionListener
         JMenu menu = new JMenu("Menu");
         menu.setMnemonic(KeyEvent.VK_A);
         menuBar.add(menu);
-        JMenu loadSubMenu = new JMenu("Load File");
-        loadSubMenu.setMnemonic(KeyEvent.VK_S);
+
         loadFitnessGoals = new JMenuItem("Load Fitness Goals");
-        loadSubMenu.add(loadFitnessGoals);
-
-        JMenu saveSubMenu = new JMenu("Save File");
-        saveSubMenu.setMnemonic(KeyEvent.VK_S);
+        loadFitnessGoals.addActionListener(this);
         saveFitnessGoals = new JMenuItem("Save Fitness Goals");
+        saveFitnessGoals.addActionListener(this);
+        returnToMainMenu = new JMenuItem("Return to Main Menu");
 
-        menu.add(loadSubMenu);
-        loadSubMenu.addActionListener(this);
-        menu.add(saveSubMenu);
-        saveSubMenu.addActionListener(this);
+        menu.add(loadFitnessGoals);
+        menu.add(saveFitnessGoals);
         frame.setJMenuBar(menuBar);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loadFitnessGoals) {
-            //
+            Main.loadFitnessGoals();
         } else if (e.getSource() == saveFitnessGoals) {
-//            frame.dispose();
+            Main.saveFitnessGoals();
         }
     }
 
     // MODIFIES: this
     // EFFECTS: adds the panels and layout for the frame
     public void setUpFrame() {
-        listModel = new DefaultListModel();
+//        listModel = new FitnessGoalsListModel();
 
         //Create the list and put it in a scroll pane.
-        listOfGoals = new JList(listModel);
+//        listOfGoals = new JList(listModel);
         listOfGoals.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listOfGoals.setSelectedIndex(0);
         listOfGoals.addListSelectionListener(this);
@@ -145,20 +154,22 @@ public class FitnessGoalsButton implements ActionListener, ListSelectionListener
         public void actionPerformed(ActionEvent e) {
             String newGoal = newGoalText.getText();
 
-            if (newGoal.equals("") || listModel.contains(newGoal)) {
-                Toolkit.getDefaultToolkit().beep();
-                newGoalText.requestFocusInWindow();
-                newGoalText.selectAll();
-                return;
-            }
+//            if (newGoal.equals("") || listModel.contains(newGoal)) {
+//            if (newGoal.equals("")) {
+//                Toolkit.getDefaultToolkit().beep();
+//                newGoalText.requestFocusInWindow();
+//                newGoalText.selectAll();
+//                return;
+//            }
 
-            listModel.insertElementAt(newGoalText.getText(), listModel.size());
+            listModel.addFitnessGoal(newGoalText.getText());
+//            listModel.insertElementAt(new FitnessGoal(newGoalText.getText()), listModel.size());
 
-            newGoalText.requestFocusInWindow();
+//            newGoalText.requestFocusInWindow();
             newGoalText.setText("");
-
-            listOfGoals.setSelectedIndex(listModel.size() - 1);
-            listOfGoals.ensureIndexIsVisible(listModel.size() - 1);
+//
+//            listOfGoals.setSelectedIndex(listModel.getSize() - 1);
+//            listOfGoals.ensureIndexIsVisible(listModel.getSize() - 1);
         }
 
         public void insertUpdate(DocumentEvent e) {
@@ -192,7 +203,7 @@ public class FitnessGoalsButton implements ActionListener, ListSelectionListener
     class CompletedGoalListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             int selected = listOfGoals.getSelectedIndex();
-            listModel.remove(selected);
+            listModel.removeFitnessGoalAt(selected);
 
             if (listModel.getSize() == 0) {
                 completedButton.setEnabled(false);
