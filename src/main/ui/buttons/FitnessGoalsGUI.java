@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 // Represents the frame that opens when pressing the FitnessGoal Button on main menu
 public class FitnessGoalsGUI {
@@ -48,7 +49,7 @@ public class FitnessGoalsGUI {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates the add fitness goal button
+    // EFFECTS: creates the add fitness goal button and allows you to add a new goal
     public void setUpAddButton() {
         addButton = new JButton("Add New Fitness Goal");
 
@@ -63,16 +64,28 @@ public class FitnessGoalsGUI {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates the text field for the new goal to be typed
+    // EFFECTS: creates the text field for the new goal to be typed and added
     public void setUpNewGoalField() {
         newGoal = new JTextField(10);
 
-        // add the fitness goal by pressing "enter"
-        newGoal.addActionListener(new ActionListener() {
+        newGoal.addKeyListener(new KeyListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                listModel.addFitnessGoal(newGoal.getText());
-                newGoal.setText("");
+            public void keyTyped(KeyEvent e) {
+                // not used
+            }
+
+            // add the fitness goal by pressing "enter"
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    listModel.addFitnessGoal(newGoal.getText());
+                    newGoal.setText("");
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // not used
             }
         });
     }

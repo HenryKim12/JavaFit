@@ -31,8 +31,8 @@ public class PullWorkoutListModel implements ListModel {
 
     // MODIFIES: this
     // EFFECTS: adds the given exercise to list
-    public void addExercise(Exercise e) {
-        pull.addExercise(e);
+    public void addExercise(String name, String muscle, String sets, String reps) {
+        pull.addExercise(new Exercise(name, muscle, Integer.parseInt(sets), Integer.parseInt(reps)));
         notifyListeners();
     }
 

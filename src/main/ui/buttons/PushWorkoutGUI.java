@@ -63,6 +63,7 @@ public class PushWorkoutGUI {
     public void setUpPushWorkoutList() {
         listModel = new PushWorkoutListModel(push);
         listOfPushExercises = new JList(listModel);
+//        listOfPushExercises.setFixedCellHeight(50);
         JScrollPane listScrollPane = new JScrollPane(listOfPushExercises);
         frame.add(listScrollPane, BorderLayout.CENTER);
     }

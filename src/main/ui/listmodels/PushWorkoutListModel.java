@@ -33,7 +33,6 @@ public class PushWorkoutListModel implements ListModel {
     // EFFECTS: adds the given exercise to the list
     public void addExercise(String name, String muscle, String sets, String reps) {
         push.addExercise(new Exercise(name, muscle, Integer.parseInt(sets), Integer.parseInt(reps)));
-//        push.addExercise(e);
         notifyListeners();
     }
 

@@ -208,8 +208,8 @@ public class PullWorkoutGUI {
             submit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    listModel.addExercise(new Exercise(nameValue.getText(), muscleValue.getText(),
-                            Integer.parseInt(setsValue.getText()), Integer.parseInt(repsValue.getText())));
+                    listModel.addExercise(nameValue.getText(), muscleValue.getText(),setsValue.getText(),
+                            repsValue.getText());
                     newExerciseFrame.dispose();
                 }
             });

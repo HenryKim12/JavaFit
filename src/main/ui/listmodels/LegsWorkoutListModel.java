@@ -31,8 +31,8 @@ public class LegsWorkoutListModel implements ListModel {
 
     // MODIFIES: this
     // EFFECTS: adds the given exercise to the workout
-    public void addExercise(Exercise e) {
-        legs.addExercise(e);
+    public void addExercise(String name, String muscle, String sets, String reps) {
+        legs.addExercise(new Exercise(name, muscle, Integer.parseInt(sets), Integer.parseInt(reps)));
         notifyListeners();
     }
 

@@ -1,1 +1,7 @@
-{"eaten today": []}
+{"eaten today": [{
+    "carbohydrates": 1,
+    "fats": 1,
+    "protein": 1,
+    "name": "a",
+    "calories": 1
+}]}

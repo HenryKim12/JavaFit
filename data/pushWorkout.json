@@ -1,4 +1,17 @@
 {
-    "exercises": [],
+    "exercises": [
+        {
+            "reps": 1,
+            "sets": 1,
+            "muscleGroup": "asdf",
+            "name": "asdf"
+        },
+        {
+            "reps": 2,
+            "sets": 2,
+            "muscleGroup": "aa",
+            "name": "aa"
+        }
+    ],
     "title": "Push Day"
 }

@@ -28,8 +28,12 @@ Phase 2 User Stories:
 
 # Instructions for Grader
 
-- You can generate the first required event by 
-- You can generate the second required event by...
+- You can generate the first required event by clicking the fitness goals button on the main menu. You can
+add a new fitness goal (X) by typing into the text box at the top, then pressing "enter" on the keyboard to add the 
+goal to the list (Y) -- the event for adding is a key event (you can also add by clicking the add button).
+- You can generate the second required event by clicking the fitness goals button on the main menu. You can 
+remove a fitness goal (X) by selecting a goal in the list, then clicking on the completed button at the bottom
+of the frame to remove it from the list (Y) -- the event for removing is an action event.
 - You can locate my visual component by running Main in the ui package. The visual component is an image in the center
 of the main frame. It represents the logo for JavaFit. 
 - You can save the state of my application by going to the menu bar at the top left in any of the GUIs aside 

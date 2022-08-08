@@ -63,6 +63,11 @@ public class Exercise implements Writable {
     }
 
     @Override
+    public String toString() {
+        return "name = " + name + " | " + "muscle = " + muscleGroup + " | " + sets + " x " + reps;
+    }
+
+    @Override
     public boolean equals(Object otherObject) {
         boolean isEqual = false;
         if (otherObject instanceof Exercise) {
