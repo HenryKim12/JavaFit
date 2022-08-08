@@ -20,4 +20,9 @@ public class FitnessGoalTest {
         assertEquals("I want to lose 12lbs in the next 6 months.", fg1.getGoal());
         assertEquals("I want to fit into my new jeans.", fg2.getGoal());
     }
+
+    @Test
+    public void testToString() {
+        assertEquals("I want to fit into my new jeans.", fg2.toString());
+    }
 }
