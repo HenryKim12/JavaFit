@@ -6,7 +6,6 @@ import model.Workout;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -61,7 +60,7 @@ public class Main {
         jsonMealsReader = new JsonReader(MEALS_STORE);
     }
 
-    // MODIFIES: this, push
+    // MODIFIES: push
     // EFFECTS: loads push workout from a file and updates push
     public static void loadPushWorkout() {
         try {
@@ -73,7 +72,7 @@ public class Main {
         }
     }
 
-    // MODIFIES: this, pull
+    // MODIFIES: pull
     // EFFECTS: loads pull workout from file and updates pull
     public static void loadPullWorkout() {
         try {
@@ -85,7 +84,7 @@ public class Main {
         }
     }
 
-    // MODIFIES: this, legs
+    // MODIFIES: legs
     // EFFECTS: loads legs workout from file and updates legs
     public static void loadLegsWorkout() {
         try {
@@ -97,7 +96,7 @@ public class Main {
         }
     }
 
-    // MODIFIES: this, fitnessGoals
+    // MODIFIES: fitnessGoals
     // EFFECTS: loads fitness goals from file and updates fitnessGoals
     public static void loadFitnessGoals() {
         try {
@@ -109,7 +108,7 @@ public class Main {
         }
     }
 
-    // MODIFIES: this, meals
+    // MODIFIES: meals
     // EFFECTS: loads meals from file and updates meals
     public static void loadDailyMeals() {
         try {

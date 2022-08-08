@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-// Represents the frame that opens when pressing the FitnessGoal Button on main menu
+// Represents the frame that opens when pressing the Fitness Goal Button on main menu
 public class FitnessGoalsGUI {
 
     private JFrame frame;
@@ -48,7 +48,7 @@ public class FitnessGoalsGUI {
         setUpMenu();
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, fitnessGoals
     // EFFECTS: creates the add fitness goal button and allows you to add a new goal
     public void setUpAddButton() {
         addButton = new JButton("Add New Fitness Goal");
@@ -63,15 +63,14 @@ public class FitnessGoalsGUI {
         });
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, fitnessGoals
     // EFFECTS: creates the text field for the new goal to be typed and added
     public void setUpNewGoalField() {
         newGoal = new JTextField(10);
-
         newGoal.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                // not used
+                // not needed
             }
 
             // add the fitness goal by pressing "enter"
@@ -85,7 +84,7 @@ public class FitnessGoalsGUI {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                // not used
+                // not needed
             }
         });
     }
@@ -117,7 +116,7 @@ public class FitnessGoalsGUI {
         frame.add(listScrollPane, BorderLayout.CENTER);
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, fitnessGoals
     // EFFECTS: creates the completed button for when a goal has been accomplished
     public void setUpCompletedButton() {
         completedButton = new JButton("Completed Goal!");
@@ -164,6 +163,7 @@ public class FitnessGoalsGUI {
         frame.setJMenuBar(menuBar);
     }
 
+    // EFFECTS: opens a window to show that saving was done properly
     public void confirmSaved() {
         JFrame savedFrame = new JFrame();
         savedFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

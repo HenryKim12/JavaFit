@@ -18,8 +18,8 @@ public class MealsGUI {
     private JList allMealsList;
     private MealsListModel listModel;
     private JButton addMealButton;
+    private JButton removeMealButton;
     private JLabel caption;
-    private JPanel listPanel;
     private JPanel namePanel;
     private JPanel caloriesPanel;
     private JPanel carbsPanel;
@@ -37,7 +37,7 @@ public class MealsGUI {
     private JMenuItem loadMeals;
     private JMenuItem saveMeals;
 
-    // EFFECTS: constructs the frame
+    // EFFECTS: constructs the frame for meals
     public MealsGUI(DailyMeals meals) {
         this.meals = meals;
 
@@ -50,11 +50,15 @@ public class MealsGUI {
         setUpAllMealsCaption();
         setUpMealsList();
         setUpAddMealButton();
+        setUpRemoveMealButton();
         setUpMenu();
 
+        JPanel editPanel = new JPanel();
+        editPanel.add(addMealButton);
+        editPanel.add(removeMealButton);
+
         frame.add(caption, BorderLayout.NORTH);
-        frame.add(listPanel, BorderLayout.CENTER);
-        frame.add(addMealButton, BorderLayout.SOUTH);
+        frame.add(editPanel, BorderLayout.SOUTH);
     }
 
     // MODIFIES: this
@@ -66,14 +70,13 @@ public class MealsGUI {
     // MODIFIES: this
     // EFFECTS: creates the list of meals
     public void setUpMealsList() {
-        listPanel = new JPanel();
         listModel = new MealsListModel(meals);
         allMealsList = new JList(listModel);
         JScrollPane listScrollPane = new JScrollPane(allMealsList);
-        listPanel.add(listScrollPane);
+        frame.add(listScrollPane, BorderLayout.CENTER);
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, meals
     // EFFECTS: creates and implements the add meal button
     public void setUpAddMealButton() {
         addMealButton = new JButton("Add Meal");
@@ -82,6 +85,21 @@ public class MealsGUI {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == addMealButton) {
                     NewMealDetails newMeal = new NewMealDetails();
+                }
+            }
+        });
+    }
+
+    // MODIFIES: this, meals
+    // EFFECTS: creates and implements the remove meal button
+    public void setUpRemoveMealButton() {
+        removeMealButton = new JButton("Remove Meal");
+        removeMealButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int i = allMealsList.getSelectedIndex();
+                if (i >= 0) {
+                    listModel.removeMealAt(i);
                 }
             }
         });
@@ -117,6 +135,7 @@ public class MealsGUI {
         frame.setJMenuBar(menuBar);
     }
 
+    // EFFECTS: opens a window to show that saving was done properly
     public void confirmSaved() {
         JFrame savedFrame = new JFrame();
         savedFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -224,7 +243,7 @@ public class MealsGUI {
         }
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, listModel
     // EFFECTS: creates the submit button
     public void setUpSubmitButton() {
         submit = new JButton("Submit");

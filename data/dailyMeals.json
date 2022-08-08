@@ -1,7 +1,16 @@
-{"eaten today": [{
-    "carbohydrates": 1,
-    "fats": 1,
-    "protein": 1,
-    "name": "a",
-    "calories": 1
-}]}
+{"eaten today": [
+    {
+        "carbohydrates": 5,
+        "fats": 23,
+        "protein": 234,
+        "name": "chicken",
+        "calories": 6
+    },
+    {
+        "carbohydrates": 345,
+        "fats": 234,
+        "protein": 1,
+        "name": "rice",
+        "calories": 435
+    }
+]}

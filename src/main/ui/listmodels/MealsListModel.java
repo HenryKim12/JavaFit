@@ -29,17 +29,15 @@ public class MealsListModel implements ListModel {
         return meals.getDailyMeals().get(index);
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, meals
     // EFFECTS: constructs and adds meal to meals
     public void addMeal(String name, String calories, String carbs, String fats, String protein) {
-        // meals.addMeal(m);
-        // notifyListeners();;
         meals.addMeal(new Meal(name, Integer.parseInt(calories), Integer.parseInt(carbs),
                 Integer.parseInt(fats), Integer.parseInt(protein)));
         notifyListeners();
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, meals
     // EFFECTS: removes the meal at the given index
     public void removeMealAt(int index) {
         Meal toRemove = meals.getDailyMeals().get(index);
@@ -47,12 +45,14 @@ public class MealsListModel implements ListModel {
         notifyListeners();
     }
 
+    // MODIFIES: listeners
     // EFFECTS: adds given listener to the listeners
     @Override
     public void addListDataListener(ListDataListener l) {
         listeners.add(l);
     }
 
+    // MODIFIES: listeners
     // EFFECTS: removes given listener to the listeners
     @Override
     public void removeListDataListener(ListDataListener l) {
@@ -67,6 +67,7 @@ public class MealsListModel implements ListModel {
         }
     }
 
+    // MODIFIES: meals
     // EFFECTS: updates meals
     public void updateMeals(DailyMeals meals) {
         this.meals = meals;

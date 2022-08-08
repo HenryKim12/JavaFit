@@ -1,9 +1,17 @@
 {
-    "exercises": [{
-        "reps": 1,
-        "sets": 1,
-        "muscleGroup": "a",
-        "name": "a"
-    }],
+    "exercises": [
+        {
+            "reps": 5,
+            "sets": 4,
+            "muscleGroup": "back",
+            "name": "pulldowns"
+        },
+        {
+            "reps": 6,
+            "sets": 1,
+            "muscleGroup": "back",
+            "name": "deadlift"
+        }
+    ],
     "title": "Pull Day"
 }

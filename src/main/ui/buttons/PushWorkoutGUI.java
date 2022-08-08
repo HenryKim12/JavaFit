@@ -1,6 +1,5 @@
 package ui.buttons;
 
-import model.Exercise;
 import model.Workout;
 import ui.Main;
 import ui.listmodels.PushWorkoutListModel;
@@ -17,6 +16,7 @@ public class PushWorkoutGUI {
     private JFrame frame;
     private JLabel caption;
     private JButton addPushExerciseButton;
+    private JButton removePushExerciseButton;
     private PushWorkoutListModel listModel;
     private JList listOfPushExercises;
     private JPanel namePanel;
@@ -46,10 +46,15 @@ public class PushWorkoutGUI {
         setUpCaption();
         setUpPushWorkoutList();
         setUpAddPushExercise();
+        setUpRemovePushExercise();
         setUpMenu();
 
+        JPanel editPanel = new JPanel();
+        editPanel.add(addPushExerciseButton, BorderLayout.WEST);
+        editPanel.add(removePushExerciseButton, BorderLayout.EAST);
+
         frame.add(caption, BorderLayout.NORTH);
-        frame.add(addPushExerciseButton, BorderLayout.SOUTH);
+        frame.add(editPanel, BorderLayout.SOUTH);
     }
 
     // MODIFIES: this
@@ -63,12 +68,11 @@ public class PushWorkoutGUI {
     public void setUpPushWorkoutList() {
         listModel = new PushWorkoutListModel(push);
         listOfPushExercises = new JList(listModel);
-//        listOfPushExercises.setFixedCellHeight(50);
         JScrollPane listScrollPane = new JScrollPane(listOfPushExercises);
         frame.add(listScrollPane, BorderLayout.CENTER);
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, push
     // EFFECTS: creates and implements the add push exercise button
     public void setUpAddPushExercise() {
         addPushExerciseButton = new JButton("Add New Push Exercise");
@@ -76,6 +80,21 @@ public class PushWorkoutGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 NewPushExerciseDetails exerciseAdded = new NewPushExerciseDetails();
+            }
+        });
+    }
+
+    // MODIFIES: this, push
+    // EFFECTS: creates and implements the remove exercise button
+    public void setUpRemovePushExercise() {
+        removePushExerciseButton = new JButton("Remove Exercise");
+        removePushExerciseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int i = listOfPushExercises.getSelectedIndex();
+                if (i >= 0) {
+                    listModel.removeExerciseAt(i);
+                }
             }
         });
     }
@@ -110,6 +129,7 @@ public class PushWorkoutGUI {
         frame.setJMenuBar(menuBar);
     }
 
+    // EFFECTS: opens a window to show that saving was done properly
     public void confirmSaved() {
         JFrame savedFrame = new JFrame();
         savedFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -202,7 +222,7 @@ public class PushWorkoutGUI {
             repsPanel.add(repsValue);
         }
 
-        // MODIFIES: this
+        // MODIFIES: this, listModel
         // EFFECTS: creates the submit button
         public void setUpSubmitButton() {
             submit = new JButton("Submit");

@@ -1,6 +1,5 @@
 package ui.buttons;
 
-import model.Exercise;
 import model.Workout;
 import ui.Main;
 import ui.listmodels.PullWorkoutListModel;
@@ -17,6 +16,7 @@ public class PullWorkoutGUI {
     private JFrame frame;
     private JLabel caption;
     private JButton addPullExerciseButton;
+    private JButton removePullExerciseButton;
     private PullWorkoutListModel listModel;
     private JList listOfPullExercises;
     private JPanel namePanel;
@@ -46,10 +46,15 @@ public class PullWorkoutGUI {
         setUpCaption();
         setUpPullWorkoutList();
         setUpAddPullExercise();
+        setUpRemovePullExercise();
         setUpMenu();
 
+        JPanel editPanel = new JPanel();
+        editPanel.add(addPullExerciseButton, BorderLayout.WEST);
+        editPanel.add(removePullExerciseButton, BorderLayout.EAST);
+
         frame.add(caption, BorderLayout.NORTH);
-        frame.add(addPullExerciseButton, BorderLayout.SOUTH);
+        frame.add(editPanel, BorderLayout.SOUTH);
     }
 
     // MODIFIES: this
@@ -67,7 +72,7 @@ public class PullWorkoutGUI {
         frame.add(listScrollPane, BorderLayout.CENTER);
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, pull
     // EFFECTS: creates and implements the add exercise button
     public void setUpAddPullExercise() {
         addPullExerciseButton = new JButton("Add New Pull Exercise");
@@ -75,6 +80,21 @@ public class PullWorkoutGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 NewPullExerciseDetails exerciseAdded = new NewPullExerciseDetails();
+            }
+        });
+    }
+
+    // MODIFIES: this, pull
+    // EFFECTS: creates and implements the remove exercise button
+    public void setUpRemovePullExercise() {
+        removePullExerciseButton = new JButton("Remove Exercise");
+        removePullExerciseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int i = listOfPullExercises.getSelectedIndex();
+                if (i >= 0) {
+                    listModel.removeExerciseAt(i);
+                }
             }
         });
     }
@@ -109,6 +129,7 @@ public class PullWorkoutGUI {
         frame.setJMenuBar(menuBar);
     }
 
+    // EFFECTS: opens a window to show that saving was done properly
     public void confirmSaved() {
         JFrame savedFrame = new JFrame();
         savedFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -201,7 +222,7 @@ public class PullWorkoutGUI {
             repsPanel.add(repsValue);
         }
 
-        // MODIFIES: this
+        // MODIFIES: this, listModel
         // EFFECTS: creates the submit button
         public void setUpSubmitButton() {
             submit = new JButton("Submit");

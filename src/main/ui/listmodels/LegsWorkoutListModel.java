@@ -29,14 +29,14 @@ public class LegsWorkoutListModel implements ListModel {
         return legs.getWorkout().get(index);
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, legs
     // EFFECTS: adds the given exercise to the workout
     public void addExercise(String name, String muscle, String sets, String reps) {
         legs.addExercise(new Exercise(name, muscle, Integer.parseInt(sets), Integer.parseInt(reps)));
         notifyListeners();
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, legs
     // EFFECTS: removes the exercise at the given index
     public void removeExerciseAt(int index) {
         Exercise toRemove = legs.getWorkout().get(index);
@@ -44,12 +44,14 @@ public class LegsWorkoutListModel implements ListModel {
         notifyListeners();
     }
 
+    // MODIFIES: listeners
     // EFFECTS: adds given listener to the listeners
     @Override
     public void addListDataListener(ListDataListener l) {
         listeners.add(l);
     }
 
+    // MODIFIES: listeners
     // EFFECTS: removes given listener to the listeners
     @Override
     public void removeListDataListener(ListDataListener l) {
@@ -64,6 +66,7 @@ public class LegsWorkoutListModel implements ListModel {
         }
     }
 
+    // MODIFIES: legs
     // EFFECTS: updates the legs workout
     public void updateLegsExercises(Workout legs) {
         this.legs = legs;

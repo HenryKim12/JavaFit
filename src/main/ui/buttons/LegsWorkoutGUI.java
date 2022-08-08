@@ -1,6 +1,5 @@
 package ui.buttons;
 
-import model.Exercise;
 import model.Workout;
 import ui.Main;
 import ui.listmodels.LegsWorkoutListModel;
@@ -17,6 +16,7 @@ public class LegsWorkoutGUI {
     private JFrame frame;
     private JLabel caption;
     private JButton addLegsExerciseButton;
+    private JButton removeLegsExerciseButton;
     private LegsWorkoutListModel listModel;
     private JList listOfLegsExercises;
     private JPanel namePanel;
@@ -46,10 +46,15 @@ public class LegsWorkoutGUI {
         setUpCaption();
         setUpLegsWorkoutList();
         setUpAddLegsExercise();
+        setUpRemoveLegsExercise();
         setUpMenu();
 
+        JPanel editPanel = new JPanel();
+        editPanel.add(addLegsExerciseButton, BorderLayout.WEST);
+        editPanel.add(removeLegsExerciseButton, BorderLayout.EAST);
+
         frame.add(caption, BorderLayout.NORTH);
-        frame.add(addLegsExerciseButton, BorderLayout.SOUTH);
+        frame.add(editPanel, BorderLayout.SOUTH);
     }
 
     // MODIFIES: this
@@ -67,7 +72,7 @@ public class LegsWorkoutGUI {
         frame.add(listScrollPane, BorderLayout.CENTER);
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, legs
     // EFFECTS: creates and implements the add exercise button
     public void setUpAddLegsExercise() {
         addLegsExerciseButton = new JButton("Add New Legs Exercise");
@@ -75,6 +80,21 @@ public class LegsWorkoutGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 NewLegsExerciseDetails exerciseAdded = new NewLegsExerciseDetails();
+            }
+        });
+    }
+
+    // MODIFIES: this, legs
+    // EFFECTS: creates and implements the remove exercise button
+    public void setUpRemoveLegsExercise() {
+        removeLegsExerciseButton = new JButton("Remove Exercise");
+        removeLegsExerciseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int i = listOfLegsExercises.getSelectedIndex();
+                if (i >= 0) {
+                    listModel.removeExerciseAt(i);
+                }
             }
         });
     }
@@ -109,6 +129,7 @@ public class LegsWorkoutGUI {
         frame.setJMenuBar(menuBar);
     }
 
+    // EFFECTS: opens a window to show that saving was done properly
     public void confirmSaved() {
         JFrame savedFrame = new JFrame();
         savedFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -201,7 +222,7 @@ public class LegsWorkoutGUI {
             repsPanel.add(repsValue);
         }
 
-        // MODIFIES: this
+        // MODIFIES: this, listModel
         // EFFECTS: creates the submit button
         public void setUpSubmitButton() {
             submit = new JButton("Submit");

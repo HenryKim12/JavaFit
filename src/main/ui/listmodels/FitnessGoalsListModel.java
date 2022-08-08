@@ -29,14 +29,14 @@ public class FitnessGoalsListModel implements ListModel {
         return fitnessGoals.getAllFitnessGoals().get(index);
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, fitnessGoals
     // EFFECTS: takes the goal and adds it into the list of fitness goals
     public void addFitnessGoal(String goal) {
         fitnessGoals.addFitnessGoal(new FitnessGoal(goal));
         notifyListeners();
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, fitnessGoals
     // EFFECTS: removes the fitness goal at the given index
     public void removeFitnessGoalAt(int index) {
         FitnessGoal toRemove = fitnessGoals.getAllFitnessGoals().get(index);
@@ -44,12 +44,14 @@ public class FitnessGoalsListModel implements ListModel {
         notifyListeners();
     }
 
+    // MODIFIES: listeners
     // EFFECTS: adds given listener to the listeners
     @Override
     public void addListDataListener(ListDataListener l) {
         listeners.add(l);
     }
 
+    // MODIFIES: listeners
     // EFFECTS: removes given listener from the listeners
     @Override
     public void removeListDataListener(ListDataListener l) {
@@ -64,6 +66,7 @@ public class FitnessGoalsListModel implements ListModel {
         }
     }
 
+    // MODIFIES: fitnessGoals
     // EFFECTS: updates the fitness goals
     public void updateFitnessGoals(ListOfFitnessGoals fitnessGoals) {
         this.fitnessGoals = fitnessGoals;

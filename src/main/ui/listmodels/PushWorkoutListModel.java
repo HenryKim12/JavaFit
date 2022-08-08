@@ -29,14 +29,14 @@ public class PushWorkoutListModel implements ListModel {
         return push.getWorkout().get(index);
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, push
     // EFFECTS: adds the given exercise to the list
     public void addExercise(String name, String muscle, String sets, String reps) {
         push.addExercise(new Exercise(name, muscle, Integer.parseInt(sets), Integer.parseInt(reps)));
         notifyListeners();
     }
 
-    // MODIFIES: this
+    // MODIFIES: this, push
     // EFFECTS: removes the exercise at the given index
     public void removeExerciseAt(int index) {
         Exercise toRemove = push.getWorkout().get(index);
@@ -44,12 +44,14 @@ public class PushWorkoutListModel implements ListModel {
         notifyListeners();
     }
 
+    // MODIFIES: listeners
     // EFFECTS: adds given listener to the listeners
     @Override
     public void addListDataListener(ListDataListener l) {
         listeners.add(l);
     }
 
+    // MODIFIES: listeners
     // EFFECTS: removes given listener to the listeners
     @Override
     public void removeListDataListener(ListDataListener l) {
@@ -64,6 +66,7 @@ public class PushWorkoutListModel implements ListModel {
         }
     }
 
+    // MODIFIES: push
     // EFFECTS: updates push
     public void updatePushExercises(Workout push) {
         this.push = push;
