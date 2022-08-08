@@ -43,8 +43,8 @@ public class Meal implements Writable {
 
     @Override
     public String toString() {
-        return "name = " + name + " | " + "calories = " + calories + " | " + "carbohydrates = " + carbohydrates
-                + " | " + "fats = " + fats + " | " + "protein = " + protein;
+        return name + " | " + calories + "cal" + " | " + carbohydrates + "carbs"
+                + " | " + fats + "fats" + " | " + protein + "protein";
     }
 
     @Override

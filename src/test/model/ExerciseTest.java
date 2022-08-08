@@ -1,6 +1,5 @@
 package model;
 
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -63,5 +62,11 @@ public class ExerciseTest {
     @Test
     public void testToJson() {
         assertEquals(null, e1.toJson());
+    }
+
+    @Test
+    public void testToString() {
+        String string = "Bench Press | chest | 4 x 6";
+        assertEquals(string, e1.toString());
     }
 }

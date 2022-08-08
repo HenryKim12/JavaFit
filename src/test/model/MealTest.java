@@ -24,4 +24,9 @@ public class MealTest {
         assertEquals(1, m1.getFats());
         assertEquals(8, m3.getProtein());
     }
+
+    @Test
+    public void testToString() {
+        assertEquals("Diet Pepsi | 0cal | 0carbs | 0fats | 0protein", m2.toString());
+    }
 }

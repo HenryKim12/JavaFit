@@ -64,7 +64,7 @@ public class Exercise implements Writable {
 
     @Override
     public String toString() {
-        return "name = " + name + " | " + "muscle = " + muscleGroup + " | " + sets + " x " + reps;
+        return name + " | " + muscleGroup + " | " + sets + " x " + reps;
     }
 
     @Override
