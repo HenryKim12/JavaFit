@@ -13,7 +13,7 @@ public class ListOfFitnessGoals implements Writable {
 
     // EFFECTS: constructs a list of fitness goals
     public ListOfFitnessGoals() {
-        this.allFitnessGoals = new ArrayList<FitnessGoal>();
+        this.allFitnessGoals = new ArrayList<>();
     }
 
     // MODIFIES: this

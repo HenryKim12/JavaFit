@@ -25,4 +25,16 @@ my body stronger/healthier.
 Phase 2 User Stories:
 - As a user, I want to be able to save my workouts, fitness goals, and daily meals to file.
 - As a user, I want to be able to reload my workouts, fitness goals, and meals from the last time they were saved.
- 
+
+# Instructions for Grader
+
+- You can generate the first required event by 
+- You can generate the second required event by...
+- You can locate my visual component by running Main in the ui package. The visual component is an image in the center
+of the main frame. It represents the logo for JavaFit. 
+- You can save the state of my application by going to the menu bar at the top left in any of the GUIs aside 
+from the main menu and workoutsGUI. For example: if you wish to save your fitness goals, click on
+the fitness goals button in the main menu, add whichever goals you please, then go to the menu bar and 
+select the save option. 
+- You can reload the state of my application by following the same process as saving except choosing the load
+option instead of the save option.

@@ -5,13 +5,12 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 // JavaFit application
 // based on Teller app; link below:
 // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
-public class JavaFitApp {
+public class JavaFitUI {
     private static final String PUSH_STORE = "./data/pushWorkout.json";
     private static final String PULL_STORE = "./data/pullWorkout.json";
     private static final String LEGS_STORE = "./data/legsWorkout.json";
@@ -36,7 +35,7 @@ public class JavaFitApp {
 
 
     // EFFECTS: runs the JavaFit application
-    public JavaFitApp() throws FileNotFoundException {
+    public JavaFitUI() throws FileNotFoundException {
         runJavaFit();
     }
 
@@ -328,56 +327,31 @@ public class JavaFitApp {
     // MODIFIES: this
     // EFFECTS: loads push workout from file
     public void loadPushWorkout() {
-        try {
-            push = jsonPushReader.readPushWorkout();
-            System.out.println("Loaded " + push.getWorkoutTitle() + " from " + PUSH_STORE);
-        } catch (IOException e) {
-            System.out.println("Unable to read from file: " + PUSH_STORE);
-        }
+        Main.loadPushWorkout();
     }
 
     // MODIFIES: this
     // EFFECTS: loads pull workout from file
     public void loadPullWorkout() {
-        try {
-            pull = jsonPullReader.readPullWorkout();
-            System.out.println("Loaded " + pull.getWorkoutTitle() + " from " + PULL_STORE);
-        } catch (IOException e) {
-            System.out.println("Unable to read from file: " + PULL_STORE);
-        }
+        Main.loadPullWorkout();
     }
 
     // MODIFIES: this
     // EFFECTS: loads legs workout from file
     public void loadLegsWorkout() {
-        try {
-            legs = jsonLegsReader.readLegsWorkout();
-            System.out.println("Loaded " + legs.getWorkoutTitle() + " from " + LEGS_STORE);
-        } catch (IOException e) {
-            System.out.println("Unable to read from file: " + LEGS_STORE);
-        }
+        Main.loadLegsWorkout();
     }
 
     // MODIFIES: this
     // EFFECTS: loads fitness goals from file
     public void loadFitnessGoals() {
-        try {
-            fitnessGoals = jsonGoalsReader.readListOfFitnessGoals();
-            System.out.println("Loaded fitness goals from " + GOALS_STORE);
-        } catch (IOException e) {
-            System.out.println("Unable to read from file: " + GOALS_STORE);
-        }
+        Main.loadFitnessGoals();
     }
 
     // MODIFIES: this
     // EFFECTS: loads meals from file
     public void loadDailyMeals() {
-        try {
-            meals = jsonMealsReader.readMeals();
-            System.out.println("Loaded meals from " + MEALS_STORE);
-        } catch (IOException e) {
-            System.out.println("Unable to read from file: " + MEALS_STORE);
-        }
+        Main.loadDailyMeals();
     }
 
     // EFFECTS: prompts the user to select the data to save and saves it to file
@@ -411,38 +385,17 @@ public class JavaFitApp {
 
     // EFFECTS: saves push workout to file
     public void savePushWorkout() {
-        try {
-            jsonPushWriter.open();
-            jsonPushWriter.writePushWorkout(push);
-            jsonPushWriter.close();
-            System.out.println("Saved " + push.getWorkoutTitle() + " to " + PUSH_STORE);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + PUSH_STORE);
-        }
+        Main.savePushWorkout();
     }
 
     // EFFECTS: saves pull workout to file
     public void savePullWorkout() {
-        try {
-            jsonPullWriter.open();
-            jsonPullWriter.writePullWorkout(pull);
-            jsonPullWriter.close();
-            System.out.println("Saved " + pull.getWorkoutTitle() + " to " + PULL_STORE);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + PULL_STORE);
-        }
+        Main.savePullWorkout();
     }
 
     // EFFECTS: saves legs workout to file
     public void saveLegsWorkout() {
-        try {
-            jsonLegsWriter.open();
-            jsonLegsWriter.writeLegsWorkout(legs);
-            jsonLegsWriter.close();
-            System.out.println("Saved " + legs.getWorkoutTitle() + " to " + LEGS_STORE);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + LEGS_STORE);
-        }
+        Main.saveLegsWorkout();
     }
 
     // EFFECTS: saves fitness goals to file

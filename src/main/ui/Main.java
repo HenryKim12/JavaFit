@@ -6,9 +6,11 @@ import model.Workout;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// Main class that runs the JavaFit application
 public class Main {
 
     private static final String PUSH_STORE = "./data/pushWorkout.json";
@@ -33,13 +35,15 @@ public class Main {
     private static DailyMeals meals;
     private static JavaFit javaFit;
 
+    // EFFECTS: runs JavaFit
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                javaFit = new JavaFit(fitnessGoals);
-            }
-        });
+        push = new Workout("Push Day");
+        pull = new Workout("Pull Day");
+        legs = new Workout("Leg Day");
         fitnessGoals = new ListOfFitnessGoals();
+        meals = new DailyMeals();
+
+        javaFit = new JavaFit(push, pull, legs, fitnessGoals, meals);
 
         jsonPushWriter = new JsonWriter(PUSH_STORE);
         jsonPushReader = new JsonReader(PUSH_STORE);
@@ -55,66 +59,69 @@ public class Main {
 
         jsonMealsWriter = new JsonWriter(MEALS_STORE);
         jsonMealsReader = new JsonReader(MEALS_STORE);
-
-        push = new Workout("Push Day");
-        pull = new Workout("Pull Day");
-        legs = new Workout("Leg Day");
-        meals = new DailyMeals();
     }
 
+    // MODIFIES: this, push
+    // EFFECTS: loads push workout from a file and updates push
     public static void loadPushWorkout() {
         try {
             push = jsonPushReader.readPushWorkout();
+            javaFit.updatePushExercises(push);
             System.out.println("Loaded " + push.getWorkoutTitle() + " from " + PUSH_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + PUSH_STORE);
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: loads pull workout from file
+    // MODIFIES: this, pull
+    // EFFECTS: loads pull workout from file and updates pull
     public static void loadPullWorkout() {
         try {
             pull = jsonPullReader.readPullWorkout();
+            javaFit.updatePullExercises(pull);
             System.out.println("Loaded " + pull.getWorkoutTitle() + " from " + PULL_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + PULL_STORE);
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: loads legs workout from file
+    // MODIFIES: this, legs
+    // EFFECTS: loads legs workout from file and updates legs
     public static void loadLegsWorkout() {
         try {
             legs = jsonLegsReader.readLegsWorkout();
+            javaFit.updateLegsExercises(legs);
             System.out.println("Loaded " + legs.getWorkoutTitle() + " from " + LEGS_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + LEGS_STORE);
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: loads fitness goals from file
+    // MODIFIES: this, fitnessGoals
+    // EFFECTS: loads fitness goals from file and updates fitnessGoals
     public static void loadFitnessGoals() {
         try {
             fitnessGoals = jsonGoalsReader.readListOfFitnessGoals();
+            javaFit.updateFitnessGoals(fitnessGoals);
             System.out.println("Loaded fitness goals from " + GOALS_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + GOALS_STORE);
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: loads meals from file
+    // MODIFIES: this, meals
+    // EFFECTS: loads meals from file and updates meals
     public static void loadDailyMeals() {
         try {
             meals = jsonMealsReader.readMeals();
+            javaFit.updateMeals(meals);
             System.out.println("Loaded meals from " + MEALS_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + MEALS_STORE);
         }
     }
 
+    // EFFECTS: saves push workout to file
     public static void savePushWorkout() {
         try {
             jsonPushWriter.open();
@@ -173,5 +180,4 @@ public class Main {
             System.out.println("Unable to write to file: " + MEALS_STORE);
         }
     }
-
 }
