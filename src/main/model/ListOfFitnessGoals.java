@@ -23,6 +23,8 @@ public class ListOfFitnessGoals implements Writable {
     public boolean addFitnessGoal(FitnessGoal fg) {
         if (!allFitnessGoals.contains(fg)) {
             allFitnessGoals.add(fg);
+            EventLog.getInstance().logEvent(new Event("- " + fg.getGoal()
+                    + " added to list of fitness goals!"));
             return true;
         }
         return false;
@@ -35,6 +37,8 @@ public class ListOfFitnessGoals implements Writable {
     public boolean removeFitnessGoal(FitnessGoal fg) {
         if (allFitnessGoals.contains(fg)) {
             allFitnessGoals.remove(fg);
+            EventLog.getInstance().logEvent(new Event("- " + fg.getGoal()
+                    + " removed from list of fitness goals!"));
             return true;
         }
         return false;

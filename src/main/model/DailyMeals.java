@@ -24,6 +24,7 @@ public class DailyMeals implements Writable {
     // EFFECTS: adds the given meal to the list and produces true
     public boolean addMeal(Meal m) {
         this.eatenToday.add(m);
+        EventLog.getInstance().logEvent(new Event("- " + m.getName() + " and it's macros have been added!"));
         return true;
     }
 
@@ -34,6 +35,7 @@ public class DailyMeals implements Writable {
     public boolean removeMeal(Meal m) {
         if (this.eatenToday.contains(m)) {
             this.eatenToday.remove(m);
+            EventLog.getInstance().logEvent(new Event("- " + m.getName() + " removed from list of meals"));
             return true;
         }
         return false;

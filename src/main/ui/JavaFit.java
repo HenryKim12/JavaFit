@@ -1,6 +1,7 @@
 package ui;
 
 import model.DailyMeals;
+import model.EventLog;
 import model.ListOfFitnessGoals;
 import model.Workout;
 import ui.buttons.FitnessGoalsGUI;
@@ -11,6 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 // Represents the main menu of JavaFit (main frame when opening GUI)
 public class JavaFit extends JFrame {
@@ -49,15 +52,50 @@ public class JavaFit extends JFrame {
         frame.add(title, BorderLayout.NORTH);
 
         // Image (logo)
-        String imagePath = "C:\\Users\\henry\\OneDrive\\Documents\\2nd Year\\CPSC 210\\JavaFitLogo.jpg";
-        frame.add(new JLabel(new ImageIcon(imagePath)));
+        String imagePath = "JLogo.jpg";
+        frame.add(new JLabel(new ImageIcon(this.getClass().getResource(imagePath))));
 
         setUpWorkoutsButton();
         setUpFitnessGoalsButton();
         setUpMealsButton();
         setUpButtonPanel();
 
+        setUpLog();
+
         frame.setVisible(true);
+    }
+
+    public void setUpLog() {
+        frame.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                printLog(EventLog.getInstance());
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {}
+
+            @Override
+            public void windowIconified(WindowEvent e) {}
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+
+            @Override
+            public void windowActivated(WindowEvent e) {}
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+    }
+
+    public void printLog(EventLog el) {
+        for (model.Event next : el) {
+            System.out.println(next.toString());
+        }
     }
 
     // MODIFIES: this

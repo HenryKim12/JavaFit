@@ -30,6 +30,7 @@ public class Workout implements Writable {
             workout.get(pos).addRep(e.getReps());
         } else {
             workout.add(e);
+            EventLog.getInstance().logEvent(new Event("- " + e.getName() + " added to workout!"));
         }
     }
 
@@ -40,6 +41,7 @@ public class Workout implements Writable {
     public boolean removeExercise(Exercise e) {
         if (workout.contains(e)) {
             workout.remove(e);
+            EventLog.getInstance().logEvent(new Event("- " + e.getName() + " removed from workout!"));
             return true;
         }
         return false;

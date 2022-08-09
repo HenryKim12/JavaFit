@@ -1,17 +1,9 @@
 {
-    "exercises": [
-        {
-            "reps": 8,
-            "sets": 4,
-            "muscleGroup": "chest",
-            "name": "bench press "
-        },
-        {
-            "reps": 10,
-            "sets": 3,
-            "muscleGroup": "chest",
-            "name": "incline "
-        }
-    ],
+    "exercises": [{
+        "reps": 4,
+        "sets": 4,
+        "muscleGroup": "chest",
+        "name": "bench"
+    }],
     "title": "Push Day"
 }
