@@ -42,3 +42,14 @@ the fitness goals button in the main menu, add whichever goals you please, then 
 select the save option. 
 - You can reload the state of my application by following the same process as saving except choosing the load
 option instead of the save option.
+
+# Phase 4: Task 2
+
+Tue Aug 09 16:03:41 PDT 2022
+- eat more food added to list of fitness goals!
+
+Tue Aug 09 16:03:44 PDT 2022
+- eat more food removed from list of fitness goals!
+
+# Phase 4: Task 3
+
