@@ -53,3 +53,7 @@ Tue Aug 09 16:03:44 PDT 2022
 
 # Phase 4: Task 3
 
+- I would add exceptions into the design of my application so that it becomes more robust.
+- I would add a workouts interface that becomes implemented by each of my workouts to allow for
+different functionality.
+- I would use hashmaps and other forms of lists/sets instead of simple arraylists. 
