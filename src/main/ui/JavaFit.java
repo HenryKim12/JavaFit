@@ -65,6 +65,7 @@ public class JavaFit extends JFrame {
         frame.setVisible(true);
     }
 
+    // EFFECTS: sets up the logging system when closing the application
     public void setUpLog() {
         frame.addWindowListener(new WindowListener() {
             @Override
@@ -92,6 +93,7 @@ public class JavaFit extends JFrame {
         });
     }
 
+    // EFFECTS: logs the events that occurred into the console
     public void printLog(EventLog el) {
         for (model.Event next : el) {
             System.out.println(next.toString());

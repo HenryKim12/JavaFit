@@ -45,6 +45,8 @@ option instead of the save option.
 
 # Phase 4: Task 2
 
+Sample of adding a fitness goal then removing it afterwards:
+
 Tue Aug 09 16:03:41 PDT 2022
 - eat more food added to list of fitness goals!
 
@@ -53,7 +55,10 @@ Tue Aug 09 16:03:44 PDT 2022
 
 # Phase 4: Task 3
 
-- I would add exceptions into the design of my application so that it becomes more robust.
-- I would add a workouts interface that becomes implemented by each of my workouts to allow for
-different functionality.
-- I would use hashmaps and other forms of lists/sets instead of simple arraylists. 
+- I would add exceptions into the design of my application so that it becomes more robust, especially when implementing
+the adding and removing methods for my lists.
+- There is a decent amount of duplication of code seen within the GUIs, especially seen in the GUIs for workouts. 
+I would have liked to create a class that becomes inherited by the GUIs to remove the redundancy of the code 
+and make it easier for the reader to read.
+- I would have liked to implement my workouts as hashmaps with the given key being the workout and the values being
+a list of the exercises instead of the simple arraylists. 
