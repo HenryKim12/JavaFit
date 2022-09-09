@@ -1,0 +1,9 @@
+{
+    "exercises": [{
+        "reps": 10,
+        "sets": 3,
+        "muscleGroup": "back",
+        "name": "pulldown"
+    }],
+    "title": "Pull Day"
+}
